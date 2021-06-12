@@ -2,6 +2,7 @@ import { Image } from '@chakra-ui/image';
 import {
   Box,
   Center,
+  Circle,
   Container,
   Heading,
   HStack,
@@ -21,13 +22,13 @@ import { PopularPosts } from '../components/Blog/FeaturedPosts';
 import news1 from '../assets/blog/news1.jpg';
 import news2 from '../assets/blog/news2.jpg';
 import news3 from '../assets/blog/news3.jpg';
-import { MdShare } from 'react-icons/md';
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaTwitter,
-} from 'react-icons/fa';
+import { IoIosShareAlt } from 'react-icons/io';
+import { FaCopy } from 'react-icons/fa';
+import facebook from '../assets/social_icons/facebook.png';
+import whatsapp from '../assets/social_icons/whatsapp.png';
+import pinterest from '../assets/social_icons/pinterest.png';
+import twitter from '../assets/social_icons/twitter.png';
+import linkedin from '../assets/social_icons/linkedin.png';
 const popular = [
   {
     date: '11/07/2020',
@@ -190,88 +191,88 @@ function BlogRead() {
               borderTopColor="primary.100"
               spacing="10px"
             >
-              <Text color="primary.100" className="afont">
+              <Text fontWeight="600" color="textDarker.100" className="afont">
                 Share
               </Text>
-              <Box as="span">
-                <MdShare />
+              <Box as="span" fontSize="30px">
+                <IoIosShareAlt />
               </Box>
               <Box
                 as="span"
-                border="1px solid #339900"
                 transition="all .3s ease"
                 _hover={{
-                  bg: 'secondary.100',
-                  color: 'primary.100',
                   transform: 'scale(1.3)',
                 }}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                color="secondary.100"
                 width="30px"
                 height="30px"
-                borderRadius="50%"
+                cursor="pointer"
               >
-                <FaFacebookF />
+                <Image src={facebook} width="100%" />
               </Box>
+
               <Box
                 as="span"
-                border="1px solid #339900"
                 transition="all .3s ease"
                 _hover={{
-                  bg: 'secondary.100',
-                  color: 'primary.100',
                   transform: 'scale(1.3)',
                 }}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                color="secondary.100"
                 width="30px"
                 height="30px"
-                borderRadius="50%"
+                cursor="pointer"
               >
-                <FaLinkedinIn />
+                <Image src={linkedin} width="100%" />
               </Box>
+
               <Box
                 as="span"
-                border="1px solid #339900"
                 transition="all .3s ease"
                 _hover={{
-                  bg: 'secondary.100',
-                  color: 'primary.100',
                   transform: 'scale(1.3)',
                 }}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                color="secondary.100"
                 width="30px"
                 height="30px"
-                borderRadius="50%"
+                cursor="pointer"
               >
-                <FaInstagram />
+                <Image src={twitter} width="100%" />
               </Box>
+
               <Box
                 as="span"
-                border="1px solid #339900"
                 transition="all .3s ease"
                 _hover={{
-                  bg: 'secondary.100',
-                  color: 'primary.100',
                   transform: 'scale(1.3)',
                 }}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                color="secondary.100"
                 width="30px"
                 height="30px"
-                borderRadius="50%"
+                cursor="pointer"
               >
-                <FaTwitter />
+                <Image src={pinterest} width="100%" />
               </Box>
+
+              <Box
+                as="span"
+                transition="all .3s ease"
+                _hover={{
+                  transform: 'scale(1.3)',
+                }}
+                width="30px"
+                height="30px"
+                cursor="pointer"
+              >
+                <Image src={whatsapp} width="100%" />
+              </Box>
+              <Circle
+                transition="all .3s ease"
+                _hover={{
+                  transform: 'scale(1.3)',
+                }}
+                size="30px"
+                bg="secondary.100"
+                color="white"
+                cursor="pointer"
+              >
+                <FaCopy />
+              </Circle>
             </HStack>
           </VStack>
 
