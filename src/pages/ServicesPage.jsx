@@ -26,7 +26,7 @@ function ServicesPage() {
     <>
       <Switch>
         <Box id="farms" pt={['0px', '0px', '40px', '40px']}>
-          <Container
+          {/* <Container
             maxW="container.xl"
             px={8}
             display={pathname === '/services' ? 'none' : 'flex'}
@@ -46,8 +46,8 @@ function ServicesPage() {
                 <BreadcrumbLink>{document.title}</BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>
-          </Container>
-          <Route exact path={'/services'}>
+          </Container> */}
+          {/* <Route exact path={'/services'}>
             <Container maxW="container.xl" pb="80px">
               <SimpleGrid spacing="30px" columns={[1, 1, 2, 3]}>
                 {products.map((p, i) => {
@@ -55,7 +55,7 @@ function ServicesPage() {
                 })}
               </SimpleGrid>
             </Container>
-          </Route>
+          </Route> */}
           {products.map((p, i) => {
             return (
               <Route key={i} path={'/services' + p.path}>

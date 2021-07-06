@@ -10,28 +10,9 @@ export default function OurProcessCard({ src, num, heading }) {
       m="auto"
       bg="white"
     >
-      <Box width="100%" zIndex="2" rounded="0" mb={4}>
-        <Image
-          margin="auto"
-          src={src}
-          alt="some good alt text"
-          objectFit="cover"
-          width="100%"
-          height="100%"
-        />
-      </Box>
-
       <Stack>
         <Box p={5}>
           <Center flexDirection="column">
-            <Circle
-              size="40px"
-              bg="gray.200"
-              color="primary.100"
-              fontWeight="bold"
-            >
-              {num + '.'}
-            </Circle>
             <Heading
               textAlign="center"
               as="h4"
