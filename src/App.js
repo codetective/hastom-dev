@@ -9,6 +9,8 @@ import { Switch, Route } from 'react-router-dom'
 import Homepage from './pages/Homepage';
 import customTheme from './helpers/theme';
 import Blogpage from './pages/Blogpage';
+import AuthPage from './pages/AuthPage';
+import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 
 
@@ -20,6 +22,8 @@ function App () {
 					<Route exact path="/" component={Homepage} />
 					<Route exact path="/about" component={AboutPage} />
 					<Route exact path='/blog' component={Blogpage} />
+					<Route exact path={['/services', '/services/:route']} component={ServicesPage} />
+					<Route exact path={['/login','/register']} component={AuthPage} />
 					<Route path="/blog/:category" component={Blogpage} />
 				</Switch>
 			</Layout>
