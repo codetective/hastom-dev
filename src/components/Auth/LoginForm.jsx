@@ -78,6 +78,7 @@ export default function LoginForm() {
           <Button
             size="md"
             rounded="34px"
+            type="submit"
             color="white"
             bg="primary.100"
             px={'40px'}

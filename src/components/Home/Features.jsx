@@ -38,9 +38,9 @@ const Feature = ({ title, text, icon }) => {
 
 function Features() {
   return (
-    <Box id="features" bg="white" position="relative" width="100vw" py="80px">
+    <Box id="features" bg="white" position="relative" width="100vw" py="100px">
       <Container maxW="container.xl" px={8}>
-        <Box textAlign="center" pt={'5'} pb={'15'}>
+        <Box textAlign={['left', 'center']} pt={'5'} pb={'15'}>
           <Text
             as="p"
             color="#3eb900"
@@ -60,49 +60,14 @@ function Features() {
             fontWeight=" 500"
             letterSpacing="0"
             lineHeight="1.4"
-            mb="5"
+            mb="10"
             p={0}
           >
             <Text as="span">Why Farm With Us</Text>
           </Heading>
         </Box>
+
         <Stack spacing={'10'}>
-          <Stack
-            direction={['column', 'column', 'row', 'row']}
-            columns={{ base: 1, md: 3 }}
-            spacing={10}
-            divider={
-              <StackDivider
-                borderColor="gray.200"
-                style={{
-                  marginTop: '40px',
-                  marginBottom: '40px',
-                }}
-              />
-            }
-          >
-            <Feature
-              icon={dashboard}
-              title={'Farm Panel & Dashboard'}
-              text={
-                'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio omnis, voluptate facere facilis voluptatum a corrupti obcaecati sapiente libero quisquam! Sint ad quaerat aperiam'
-              }
-            />
-            <Feature
-              icon={insurance}
-              title={'Approved & Insured Farms'}
-              text={
-                'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio omnis, voluptate facere facilis voluptatum a corrupti obcaecati sapiente libero quisquam! Sint ad quaerat aperiam'
-              }
-            />
-            <Feature
-              icon={solar}
-              title={'Effective Farming System'}
-              text={
-                'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio omnis, voluptate facere facilis voluptatum a corrupti obcaecati sapiente libero quisquam! Sint ad quaerat aperiam'
-              }
-            />
-          </Stack>
           <Stack
             direction={['column', 'column', 'row', 'row']}
             columns={{ base: 1, md: 3 }}

@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import manager from '../../assets/header/manager.jpg';
 import cowStrip from '../../assets/header/cowStrip.jpg';
-import potatoStrip from '../../assets/header/potatoStrip.jpg';
+import nuts from '../../assets/header/nuts.jpg';
 import { BsArrowRight } from 'react-icons/bs';
 
 function ManagerTalk() {
@@ -39,7 +39,7 @@ function ManagerTalk() {
         borderRadius: '50%',
         position: 'absolute',
         bottom: '-30px',
-        right: '50%',
+        right: '60%',
       }}
     >
       {' '}
@@ -48,17 +48,17 @@ function ManagerTalk() {
         left="0"
         width="100vw"
         position="relative"
-        height={['fit-content', 'fit-content', '350px', '350px']}
+        height={['fit-content', 'fit-content', 'fit-content', 'fit-content']}
         overflowY="hidden"
       >
         <Container maxW="container.xl" px={8}>
           <Flex wrap w="100%" flexDir={['column', 'column', 'row', 'row']}>
             <Stack
-              w={['100%', '100%', '40%', '40%']}
+              w={['100%', '100%', '90%', '40%']}
               alignItems="flex-start"
               flexDir="column"
               justifyContent="center"
-              py="40px"
+              py="50px"
               pr="1"
             >
               <Text
@@ -77,7 +77,7 @@ function ManagerTalk() {
                   position: 'absolute',
                   left: 0,
                   top: 0,
-                  borderRight: '5px solid #fa822f',
+                  borderRight: '4px solid #fa822f',
                   borderTopRightRadius: '10px',
                   borderBottomRightRadius: '10px',
                 }}
@@ -87,25 +87,24 @@ function ManagerTalk() {
 
               <Heading
                 className="qfont"
-                as="h2"
-                fontSize={['24px', '28px']}
-                fontWeight=" 500"
+                as="h4"
+                fontSize={['20px', '28px']}
+                fontWeight=" 400"
                 letterSpacing="0"
                 color="white"
-                lineHeight="1.4"
+                lineHeight="1.6"
                 mb="5"
                 p={0}
+                py="3"
               >
                 <span class="span">"Let's begin your journey with a </span>
                 <span class="span">
                   farm full of bountiful harvest and good{' '}
                 </span>
 
-                <Text as="span">
-                  {/* <br /> */}
-                  management"
-                </Text>
+                <Text as="span">management"</Text>
               </Heading>
+
               <HStack>
                 <Avatar
                   name="Debo Thomas"
@@ -118,41 +117,38 @@ function ManagerTalk() {
                 </Text>
               </HStack>
             </Stack>
+
             <Stack
-              w={['100%', '100%', '55%', '55%']}
-              display={['none', 'none', 'flex', 'flex']}
-              height={['300px', '300px', '500px', '500px']}
-              borderLeftRadius="50%"
+              w={['100%', '100%', '50%', '50%']}
+              display={['none', 'none', 'none', 'flex']}
+              height="100%"
+              borderRadius="1000px 0% 0% 1000px"
               bg="white"
               align="flex-end"
               position={['initial', 'initial', 'absolute', 'absolute']}
-              top="-85px"
+              top="0px"
               right="0"
               justify="center"
               pr={['35px', '35px', '35px', '65px']}
-              pl="20px"
-              spacing="20px"
+              pl="40px"
+              py="45px"
+              spacing="30px"
             >
               <Box
                 border="1px solid green"
-                borderTopLeftRadius="100px"
                 shadow="lg"
                 w="100%"
-                maxW="600px"
-                pr="3"
+                maxW="92%"
+                borderRadius="1000px 0% 0% 1px"
+                pr="4"
               >
-                <HStack
-                  borderBottomLeftRadius="100px"
-                  p="10px"
-                  align="top"
-                  justify="space-between"
-                >
-                  <HStack spacing="20px">
-                    <Box width="30%" height="100%">
+                <HStack p="10px" align="top" justify="space-between">
+                  <HStack spacing="20px" alignSelf="center">
+                    <Box width="25%" h="100%" pl="1">
                       <Image
                         src={cowStrip}
                         objectFit="cover"
-                        borderTopLeftRadius="100px"
+                        borderRadius="1000px 0% 0% 1px"
                       />
                     </Box>
                     <Box>
@@ -169,6 +165,7 @@ function ManagerTalk() {
                       </Text>
                     </Box>
                   </HStack>
+
                   <Box
                     as="span"
                     fontSize="20px"
@@ -182,40 +179,36 @@ function ManagerTalk() {
 
               <Box
                 border="1px solid green"
-                borderBottomLeftRadius="100px"
                 shadow="lg"
                 w="100%"
-                maxW="600px"
-                pr="3"
+                maxW="92%"
+                pr="4"
+                borderRadius="1px 0% 0% 1000px"
               >
-                <HStack
-                  borderBottomLeftRadius="100px"
-                  p="10px"
-                  align="top"
-                  justify="space-between"
-                >
-                  <HStack spacing="20px">
-                    <Box width="30%" height="100%">
+                <HStack p="10px" align="top" justify="space-between">
+                  <HStack spacing="20px" alignSelf="center">
+                    <Box width="25%" h="100%" pl="1">
                       <Image
-                        src={potatoStrip}
+                        src={nuts}
                         objectFit="cover"
-                        borderBottomLeftRadius="100px"
+                        borderRadius="1px 0% 0% 1000px"
                       />
                     </Box>
                     <Box>
                       <Text as="h3" className="qfont" fontSize="17px">
                         {' '}
-                        Cashew Revival Pack
+                        Cashew Revival Park
                       </Text>
                       <Text as="p" fontSize="15px">
                         {' '}
-                        21 months germination{' '}
+                        19 months germination{' '}
                       </Text>
                       <Text as="p" color="secondary.100" fontSize="15px">
                         ( Roi 45% )
                       </Text>
                     </Box>
                   </HStack>
+
                   <Box
                     as="span"
                     fontSize="20px"

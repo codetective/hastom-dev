@@ -24,7 +24,7 @@ const posts = [
       'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum aliquid quidem delectus necessitatibus nesciunt in...',
     author: 'Debo Ajikede',
     category: 'Technology',
-    caption: 'Filling system for agricultural exports and its advantages',
+    caption: 'Creating a system for agricultural exports and its advantages',
   },
   {
     image: cashew,
@@ -50,7 +50,7 @@ function FeatureCard({ post, loadingCategoryPosts }) {
     <Skeleton isLoaded={loadingCategoryPosts}>
       <Box
         as="div"
-        shadow="lg"
+        // shadow="lg"
         borderTopLeftRadius="10px"
         borderTopRightRadius="10px"
         width="100%"
@@ -64,15 +64,7 @@ function FeatureCard({ post, loadingCategoryPosts }) {
           rounded="0"
           mb={4}
         >
-          <Link
-            href={
-              post
-                ? `/blog/${post.category}/${post.caption.trim()}`
-                : '/blog/updates/test'
-            }
-            textDecoration="none"
-            _hover={{ textDecoration: 'none' }}
-          >
+          <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
             <Image
               borderTopRightRadius="10px"
               borderTopLeftRadius="10px"
@@ -89,45 +81,34 @@ function FeatureCard({ post, loadingCategoryPosts }) {
         <Stack>
           <Flex justify="space-between" pr={6}>
             <AuthorCategory category={post.category} author={post.author} />
-            <Text as={'p'} color="textDark.100">
+            <Text
+              as={'p'}
+              className="qfont"
+              fontSize="12px"
+              color="textDark.100"
+            >
               {post.date}
             </Text>
           </Flex>
-          <Box p={5}>
+
+          <Box py={3}>
             <Heading
               className="qfont"
-              fontSize={['18px', '20px', '24px', '24px']}
+              fontSize="24px !important"
+              lineHeight="1.4"
             >
               <Link
                 className="afont"
                 textDecoration="none"
+                fontWeight="500"
                 _hover={{ textDecoration: 'none' }}
-                href={
-                  post
-                    ? `/blog/${post.category}/${post.caption.trim()}`
-                    : '/blog/updates/test'
-                }
               >
                 {post.caption}
               </Link>
             </Heading>
-            <Text as="p" color="textDark" py={'25px'}>
+            <Text as="p" color="textDark" py={'10px'}>
               {post.sample}
             </Text>
-            <Link
-              textDecoration="none"
-              _hover={{ textDecoration: 'none' }}
-              color="secondary.100"
-              fontWeight="bold"
-              className="qfont"
-              href={
-                post
-                  ? `/blog/${post.category}/${post.caption.trim()}`
-                  : '/blog/updates/test'
-              }
-            >
-              Read more
-            </Link>
           </Box>
         </Stack>
       </Box>

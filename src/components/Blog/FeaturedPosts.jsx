@@ -129,7 +129,7 @@ function FeaturedPosts() {
     <Container maxW="container.xl" px={8}>
       <Flex
         minHeight="80vh"
-        pb="100px"
+        pb="80px"
         flexDirection={['column', 'column', 'row', 'row']}
       >
         <Stack spacing="40px" pt="40px">
@@ -138,9 +138,10 @@ function FeaturedPosts() {
               <Flex key={index}>
                 <Flex>
                   <Box
-                    minWidth={['100px', '170px']}
-                    maxWidth={['100px', '170px']}
-                    mr={['10px', '30px']}
+                    minWidth={['100px', '200px']}
+                    maxWidth={['100px', '200px']}
+                    display={['none', 'none', 'none', 'block']}
+                    mr={['10px', '25px']}
                     minHeight="130px"
                     maxHeight="140px"
                     zIndex="2"
@@ -151,24 +152,33 @@ function FeaturedPosts() {
                       _hover={{ textDecoration: 'none' }}
                     >
                       <Image
-                        borderRadius="5px"
+                        borderRadius="3px"
                         margin="auto"
                         src={post.image}
                         alt="some good alt text"
                         objectFit={['cover', 'cover']}
                         width="100%"
                         height="100%"
+                        display={['none', 'block']}
                       />
                     </Link>
                   </Box>
+
                   <Stack>
                     <AuthorCategory
                       category={post.category}
                       author={post.author}
                     />
                     <Heading
-                      className="qfont"
-                      fontSize={['20px', '20px', '24px', '28px']}
+                      // className="qfont"
+                      lineHeight="1.5"
+                      fontSize={[
+                        '20px',
+                        '20px',
+                        '20px !important',
+                        '24px !important',
+                      ]}
+                      fontWeight="500"
                     >
                       <Link
                         className="afont"
@@ -184,6 +194,7 @@ function FeaturedPosts() {
             );
           })}
         </Stack>
+
         <PopularPosts popular={popular} />
       </Flex>
     </Container>
