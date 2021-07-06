@@ -1,4 +1,5 @@
 import { Fade } from '@chakra-ui/transition';
+import { useEffect } from 'react';
 import About from '../components/Home/About';
 import FAQ from '../components/Home/Faq';
 import Features from '../components/Home/Features';
@@ -7,6 +8,9 @@ import LabCorner from '../components/Home/LabCorner';
 import ManagerTalk from '../components/Home/ManagerTalk';
 
 function Homepage() {
+  useEffect(() => {
+    document.title = 'Hastom Farms';
+  }, []);
   return (
     <Fade in>
       <Header />

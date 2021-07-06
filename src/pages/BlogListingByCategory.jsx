@@ -94,6 +94,7 @@ function BlogListingByCategory() {
   const [loadingCategoryPosts, setLoadingCategoryPosts] = useState(false);
 
   useEffect(() => {
+    document.title = 'Blog';
     setLoadingCategoryPosts(true);
     setTimeout(() => {
       setLoadingCategoryPosts(false);

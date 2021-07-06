@@ -16,10 +16,36 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Divider,
+  Menu,
+  MenuButton,
+  MenuList,
 } from '@chakra-ui/react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
+import products from '../../helpers/products';
 import Logo from './Logo';
+const navLinks = [
+  {
+    path: '/',
+    pathname: 'Home',
+  },
+  {
+    path: '/about',
+    pathname: 'About',
+  },
+  {
+    path: '/services',
+    pathname: 'Services',
+  },
+  {
+    path: '/blog',
+    pathname: 'Blog',
+  },
+  {
+    path: '/contact',
+    pathname: 'Contact',
+  },
+];
 
 const NavBar = props => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,123 +74,31 @@ function NavDrawer({ isOpen, onClose }) {
               justify={['center', 'space-between', 'flex-end', 'flex-end']}
               pt={[4, 4, 0, 0]}
             >
-              <MenuItem
-                color="textDarkest.100"
-                py="5px"
-                width="100%"
-                textAlign="center"
-              >
-                <NavLink
-                  onClick={onClose}
-                  activeClassName="nav-active"
-                  exact
-                  style={{
-                    display: 'block',
-                    width: '100%',
-                    padding: '5px 0',
-                    transition: 'all .3s ease',
-                  }}
-                  to="/"
-                >
-                  Home
-                </NavLink>
-              </MenuItem>
-              <MenuItem
-                color="textDarkest.100"
-                py="5px"
-                width="100%"
-                textAlign="center"
-              >
-                <NavLink
-                  onClick={onClose}
-                  activeClassName="nav-active"
-                  style={{
-                    padding: '5px 0',
-                    display: 'block',
-                    width: '100%',
-                    transition: 'all .3s ease',
-                  }}
-                  to="/about"
-                >
-                  About
-                </NavLink>
-              </MenuItem>
-              <MenuItem
-                color="textDarkest.100"
-                py="5px"
-                width="100%"
-                textAlign="center"
-              >
-                <NavLink
-                  onClick={onClose}
-                  activeClassName="nav-active"
-                  style={{
-                    padding: '5px 0',
-                    display: 'block',
-                    width: '100%',
-                    transition: 'all .3s ease',
-                  }}
-                  to="/farms"
-                >
-                  Farms
-                </NavLink>
-              </MenuItem>
-              <MenuItem
-                color="textDarkest.100"
-                py="5px"
-                width="100%"
-                textAlign="center"
-              >
-                <NavLink
-                  onClick={onClose}
-                  activeClassName="nav-active"
-                  style={{
-                    padding: '5px 0',
-                    display: 'block',
-                    width: '100%',
-                    transition: 'all .3s ease',
-                  }}
-                  to="/blog"
-                >
-                  Blog
-                </NavLink>
-              </MenuItem>
-              <MenuItem
-                color="textDarkest.100"
-                py="5px"
-                width="100%"
-                textAlign="center"
-              >
-                <NavLink
-                  onClick={onClose}
-                  activeClassName="nav-active"
-                  style={{
-                    padding: '5px 0',
-                    display: 'block',
-                    width: '100%',
-                    transition: 'all .3s ease',
-                  }}
-                  to="/contact"
-                >
-                  Contact
-                </NavLink>
-              </MenuItem>
-              {/* <MenuItem isLast>
-                <NavLink to="/login" onClick={onClose}>
-                  <Button
-                    size="sm"
-                    rounded="34px"
-                    color="white"
-                    bg="primary.100"
-                    px={'40px'}
-                    _hover={{
-                      bg: ['secondary.100'],
-                    }}
+              {navLinks.map((l, i) => {
+                return (
+                  <MenuItem
+                    color="textDarkest.100"
+                    py="5px"
+                    width="100%"
+                    textAlign="center"
                   >
-                    Login
-                  </Button>
-                </NavLink>
-              </MenuItem> */}
+                    <NavLink
+                      onClick={onClose}
+                      activeClassName="nav-active-drawer"
+                      exact={l.pathname === 'Home' ? true : false}
+                      style={{
+                        display: 'block',
+                        width: '100%',
+                        padding: '5px 0',
+                        transition: 'all .3s ease',
+                      }}
+                      to={l.path}
+                    >
+                      {l.pathname}
+                    </NavLink>
+                  </MenuItem>
+                );
+              })}
             </Stack>
           </DrawerBody>
 
@@ -232,67 +166,95 @@ const MenuLinks = ({ isOpen }) => {
         direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem color={pathname === '/' ? 'white' : 'textDarkest.100'}>
-          <NavLink
-            activeClassName="nav-active"
-            exact
-            style={{
-              padding: '5px 0',
-              transition: 'all .3s ease',
-            }}
-            to="/"
-          >
-            Home
-          </NavLink>
-        </MenuItem>
-        <MenuItem color={pathname === '/' ? 'white' : 'textDarkest.100'}>
-          <NavLink
-            activeClassName="nav-active"
-            style={{
-              padding: '5px 0',
-              transition: 'all .3s ease',
-            }}
-            to="/about"
-          >
-            About
-          </NavLink>
-        </MenuItem>
-        <MenuItem color={pathname === '/' ? 'white' : 'textDarkest.100'}>
-          <NavLink
-            activeClassName="nav-active"
-            style={{
-              padding: '5px 0',
-              transition: 'all .3s ease',
-            }}
-            to="/farms"
-          >
-            Farms
-          </NavLink>
-        </MenuItem>
-        <MenuItem color={pathname === '/' ? 'white' : 'textDarkest.100'}>
-          <NavLink
-            activeClassName="nav-active"
-            style={{
-              padding: '5px 0',
-              transition: 'all .3s ease',
-            }}
-            to="/blog"
-          >
-            Blog
-          </NavLink>
-        </MenuItem>
-        <MenuItem color={pathname === '/' ? 'white' : 'textDarkest.100'}>
-          <NavLink
-            activeClassName="nav-active"
-            style={{
-              padding: '5px 0',
-              transition: 'all .3s ease',
-            }}
-            to="/contact"
-          >
-            Contact
-          </NavLink>
-        </MenuItem>
+        {navLinks.map((l, i) => {
+          if (l.pathname === 'Services') {
+            return (
+              <MenuItem
+                key={i}
+                color={pathname === '/' ? 'white' : 'textDarkest.100'}
+              >
+                <Menu>
+                  <MenuButton
+                    as="a"
+                    fontWeight="500"
+                    px="0"
+                    transition="all 0.2s"
+                    borderRadius="md"
+                    _hover={{ bg: 'gray.400' }}
+                    _expanded={{ bg: 'blue.400' }}
+                    width="100px"
+                    _focus={{ boxShadow: 'outline' }}
+                  >
+                    Services
+                  </MenuButton>
+                  <MenuList>
+                    {products.map((p, i) => {
+                      return (
+                        <MenuItem
+                          color="black"
+                          _hover={{
+                            bg: 'gray.100',
+                          }}
+                        >
+                          <Link
+                            style={{
+                              height: '100%',
+                              width: '100%',
+                              display: 'block',
+                              padding: '5px 10px',
+                              color: 'inherit',
+                            }}
+                            to={'/services' + p.path}
+                          >
+                            {p.shortTitle}
+                          </Link>
+                        </MenuItem>
+                      );
+                    })}
+                    <MenuItem
+                      color="black"
+                      _hover={{
+                        bg: 'gray.100',
+                      }}
+                    >
+                      <Link
+                        style={{
+                          height: '100%',
+                          width: '100%',
+                          display: 'block',
+                          padding: '5px 10px',
+                          color: 'inherit',
+                        }}
+                        to="/services"
+                      >
+                        All Services
+                      </Link>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </MenuItem>
+            );
+          }
+          return (
+            <MenuItem
+              key={i}
+              color={pathname === '/' ? 'white' : 'textDarkest.100'}
+            >
+              <NavLink
+                activeClassName="nav-active"
+                exact={l.pathname === 'Home' ? true : false}
+                style={{
+                  padding: '5px 0',
+                  transition: 'all .3s ease',
+                }}
+                to={l.path}
+              >
+                {l.pathname}
+              </NavLink>
+            </MenuItem>
+          );
+        })}
+
         <MenuItem isLast>
           <NavLink to="/login">
             <Button
@@ -315,6 +277,10 @@ const MenuLinks = ({ isOpen }) => {
 };
 
 const NavBarContainer = ({ children, ...props }) => {
+  const { pathname } = useLocation();
+  if (pathname === '/login' || pathname === '/register') {
+    return null;
+  }
   return (
     <Container maxW="container.xl" px={8}>
       <Flex

@@ -10,8 +10,6 @@ import {
 } from '@chakra-ui/react';
 import header from '../../assets/header/header.jpg';
 import y_leaf from '../../assets/header/y-leaf.png';
-import { FaAngleDoubleDown } from 'react-icons/fa';
-import { motion } from 'framer-motion';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 function Header() {
@@ -30,7 +28,7 @@ function Header() {
           style={{
             position: 'absolute',
             top: '60vh',
-            left: '-15vw',
+            left: '-17vw',
             transform: 'scale(0.7)',
             zIndex: '10',
           }}
@@ -38,14 +36,20 @@ function Header() {
           src={y_leaf}
         />
 
-        <Flex wrap h="100vh" w={['100%', '100vw']} id="header-flex">
+        <Flex
+          wrap
+          minH="100vh !important"
+          w={['100%', '100vw']}
+          id="header-flex"
+        >
           <Flex
-            flexBasis={['100%', '50%']}
+            flexBasis={['100%', '36%']}
             alignItems="flex-start"
             flexDir="column"
             justifyContent="center"
             py="100px"
-            pr="1"
+            pr="5"
+            className="header-text-cont"
           >
             <Text
               as="p"
@@ -56,7 +60,7 @@ function Header() {
               font-size="14px"
               p={0}
             >
-              Invest with Hastom
+              Farmzzz with Hastom
             </Text>
 
             <Heading
@@ -69,7 +73,7 @@ function Header() {
               p={0}
               color={['whitesmoke', 'initial', 'initial']}
             >
-              <span class="span">Do you want to Own a </span>
+              <span class="span">Do you want to manage a </span>
               <span class="span"></span>
               <Text as="span" color="primary.100">
                 farm
@@ -100,6 +104,9 @@ function Header() {
               whiteSpace="nowrap"
               outline="none"
               border="none"
+              _hover={{
+                bg: ['secondary.100'],
+              }}
             >
               Get Started
             </Button>
@@ -107,7 +114,7 @@ function Header() {
 
           <Box
             flex="1"
-            h="100%"
+            h={['100%', 'auto']}
             position={['absolute', 'relative']}
             top="0px"
             left="0"
@@ -115,21 +122,21 @@ function Header() {
             bg="white"
           >
             <Image
-              borderBottomLeftRadius={['0%', '90%']}
+              borderBottomLeftRadius={['0%', '100vh']}
               src={header}
               h="100%"
               objectFit="cover"
+              filter="brightness(50%)"
             />
           </Box>
+
           <Box
             position="absolute"
-            bottom="30px"
+            bottom="0px"
             left="0"
             width="100%"
             display="flex"
             alignItems="center"
-            color="secondary.100"
-            fontSize="40px"
             boxShadow="none"
             justifyContent="center"
             zIndex="11"
@@ -141,16 +148,12 @@ function Header() {
                 boxShadow: 'none',
               }}
             >
-              <motion.div
-                animate={{ translateY: '20px' }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: 'reverse',
-                }}
-              >
-                <FaAngleDoubleDown />
-              </motion.div>
+              <div class="scroll-icon">
+                <a href="#info" class="smoothscroll">
+                  <div class="mouse"></div>
+                </a>
+                <div class="end-top"></div>
+              </div>
             </AnchorLink>
           </Box>
         </Flex>

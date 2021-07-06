@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Container,
@@ -25,6 +25,9 @@ import StaffCard from '../components/About/StaffCard';
 import OurProcessCard from '../components/About/OurProcessCard';
 
 function AboutPage() {
+  useEffect(() => {
+    document.title = 'About Hastom Farms';
+  }, []);
   return (
     <>
       <Box height="40vh" position="relative">
