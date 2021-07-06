@@ -5,14 +5,21 @@ import { Box, Center, Heading, Stack, Text } from '@chakra-ui/layout';
 export default function StaffCard({ src, num, heading, text }) {
   return (
     <Box
+      backgroundImage={src}
+      bgPos="center"
+      bgSize="cover"
       as="div"
       shadow="lg"
-      width={['300px', '400px', '100%']}
+      width={['100%', '100%', '100%']}
       m="auto"
-      bg="white"
+      // bg="white"
+      rounded="lg"
+      pos="relative"
+      h="300px"
     >
-      <Box width="100%" zIndex="2" rounded="0" mb={4}>
+      {/* <Box width="100%" zIndex="2" rounded="0">
         <Image
+          rounded="md"
           margin="auto"
           src={src}
           alt="some good alt text"
@@ -20,12 +27,13 @@ export default function StaffCard({ src, num, heading, text }) {
           width="100%"
           height="100%"
         />
-      </Box>
+      </Box> */}
 
-      <Stack>
+      <Stack pos="absolute" bottom="10px" bg="rgba(0, 0, 0, 0.6)" width="100%">
         <Box p={5}>
           <Center flexDirection="column">
             <Heading
+              color="white"
               textAlign="center"
               as="h4"
               className="qfont"
@@ -37,7 +45,7 @@ export default function StaffCard({ src, num, heading, text }) {
               {heading}
             </Heading>
 
-            <Text as="small" color="textDark.100" textAlign="center">
+            <Text as="small" color="rgb(248, 162, 47)" textAlign="center">
               {text}
             </Text>
           </Center>

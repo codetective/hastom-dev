@@ -18,8 +18,8 @@ const AuthorCategory = props => {
         as={Link}
         href={`/blog/${props.category}`}
         // as="small"
-        fontWeight="semibold"
-        fontSize="15px"
+        fontWeight="normal"
+        fontSize="14px"
         color="primary.100"
         textTransform="capitalize"
         textDecoration="none"
@@ -27,7 +27,7 @@ const AuthorCategory = props => {
       >
         {props.category}
       </Text>
-      <Text as="p" color="textDark.100" fontSize="16px">
+      <Text as="p" color="textDark.100" fontSize="14px">
         By {props.author}
       </Text>
     </Box>
@@ -47,13 +47,16 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
         <Box
           display="flex"
           flex="1"
-          marginRight="3"
           mb={5}
-          mr="40px"
+          mr="25px"
           position="relative"
           alignItems="center"
+          w="100%"
         >
-          <Skeleton isLoaded={latestPost ? loadingCategoryPosts : true}>
+          <Skeleton
+            isLoaded={latestPost ? loadingCategoryPosts : true}
+            w="100%"
+          >
             <Box width={{ base: '100%', sm: '100%' }}>
               <Link
                 href={
@@ -100,12 +103,13 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
             <Heading
               marginTop="1"
               className="qfont"
-              py={4}
-              fontSize={['24px', '24px', '28px', '28px']}
+              py={1}
+              fontSize={['32px !important', '40px !important']}
             >
               <Link
                 className="afont"
                 textDecoration="none"
+                fontWeight="bold !important"
                 _hover={{ textDecoration: 'none' }}
                 href={
                   latestPost
@@ -122,9 +126,10 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
 
           <SkeletonText
             mt="4"
-            noOfLines={4}
+            noOfLines={2}
             spacing="4"
             isLoaded={latestPost ? loadingCategoryPosts : true}
+            display={['none', 'none', 'none', 'block']}
           >
             <Text
               pb={4}
@@ -136,7 +141,7 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
             >
               {latestPost
                 ? latestPost.sample
-                : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
+                : 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
             </Text>
 
             <Link

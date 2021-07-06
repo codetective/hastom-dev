@@ -11,6 +11,7 @@ import {
 import header from '../../assets/header/header.jpg';
 import y_leaf from '../../assets/header/y-leaf.png';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -93,6 +94,8 @@ function Header() {
             </Text>
 
             <Button
+              as={Link}
+              to="/login"
               backgroundColor="#3eb900"
               borderRadius="45px"
               textAlign="center"

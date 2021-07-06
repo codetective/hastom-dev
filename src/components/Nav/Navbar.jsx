@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Box,
@@ -60,6 +60,9 @@ const NavBar = props => {
   );
 };
 function NavDrawer({ isOpen, onClose }) {
+  const { pathname } = useLocation();
+  const [open, setOpen] = useState();
+
   return (
     <>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
@@ -68,13 +71,90 @@ function NavDrawer({ isOpen, onClose }) {
           <DrawerCloseButton />
           <DrawerHeader>Menu</DrawerHeader>
 
-          <DrawerBody>
+          <DrawerBody
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
             <Stack
               align="center"
               justify={['center', 'space-between', 'flex-end', 'flex-end']}
               pt={[4, 4, 0, 0]}
             >
               {navLinks.map((l, i) => {
+                if (l.pathname === 'Services') {
+                  return (
+                    <MenuItem key={i} color="black">
+                      <Menu isOpen={open}>
+                        <MenuButton
+                          onClick={e => {
+                            setOpen(!open);
+                            e.stopPropagation();
+                          }}
+                          as="a"
+                          fontWeight="500"
+                          px="0"
+                          transition="all 0.2s"
+                          borderRadius="md"
+                          _hover={{ bg: 'gray.400' }}
+                          _expanded={{ bg: 'blue.400' }}
+                          width="100px"
+                          _focus={{ boxShadow: 'outline' }}
+                        >
+                          Services
+                        </MenuButton>
+                        <MenuList>
+                          {products.map((p, i) => {
+                            return (
+                              <MenuItem
+                                color="black"
+                                _hover={{
+                                  bg: 'gray.100',
+                                }}
+                                onClick={() => {
+                                  setOpen(false);
+                                }}
+                              >
+                                <Link
+                                  style={{
+                                    height: '100%',
+                                    width: '100%',
+                                    display: 'block',
+                                    padding: '5px 20px',
+                                    color: 'inherit',
+                                  }}
+                                  to={'/services' + p.path}
+                                >
+                                  {p.shortTitle}
+                                </Link>
+                              </MenuItem>
+                            );
+                          })}
+                          {/* <MenuItem
+                            color="black"
+                            _hover={{
+                              bg: 'gray.100',
+                            }}
+                          >
+                            <Link
+                              style={{
+                                height: '100%',
+                                width: '100%',
+                                display: 'block',
+                                padding: '5px 20px',
+                                color: 'inherit',
+                              }}
+                              to="/services"
+                            >
+                              All Services
+                            </Link>
+                          </MenuItem> */}
+                        </MenuList>
+                      </Menu>
+                    </MenuItem>
+                  );
+                }
+
                 return (
                   <MenuItem
                     color="textDarkest.100"
@@ -99,6 +179,22 @@ function NavDrawer({ isOpen, onClose }) {
                   </MenuItem>
                 );
               })}
+              <MenuItem isLast>
+                <NavLink to="/login">
+                  <Button
+                    size="sm"
+                    rounded="34px"
+                    color="white"
+                    bg="primary.100"
+                    px={'40px'}
+                    _hover={{
+                      bg: ['secondary.100'],
+                    }}
+                  >
+                    Login
+                  </Button>
+                </NavLink>
+              </MenuItem>
             </Stack>
           </DrawerBody>
 
@@ -201,7 +297,7 @@ const MenuLinks = ({ isOpen }) => {
                               height: '100%',
                               width: '100%',
                               display: 'block',
-                              padding: '5px 10px',
+                              padding: '5px 20px',
                               color: 'inherit',
                             }}
                             to={'/services' + p.path}
@@ -211,7 +307,7 @@ const MenuLinks = ({ isOpen }) => {
                         </MenuItem>
                       );
                     })}
-                    <MenuItem
+                    {/* <MenuItem
                       color="black"
                       _hover={{
                         bg: 'gray.100',
@@ -222,14 +318,14 @@ const MenuLinks = ({ isOpen }) => {
                           height: '100%',
                           width: '100%',
                           display: 'block',
-                          padding: '5px 10px',
+                          padding: '5px 20px',
                           color: 'inherit',
                         }}
                         to="/services"
                       >
                         All Services
                       </Link>
-                    </MenuItem>
+                    </MenuItem> */}
                   </MenuList>
                 </Menu>
               </MenuItem>

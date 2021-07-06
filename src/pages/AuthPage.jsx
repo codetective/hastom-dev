@@ -6,6 +6,8 @@ import LoginForm from '../components/Auth/LoginForm';
 import RegisterForm from '../components/Auth/RegisterForm';
 
 import Logo from '../components/Nav/Logo';
+import gleaf from '../assets/header/g-leaf.png';
+import yleaf from '../assets/header/y-leaf.png';
 
 const socialIcons = [
   {
@@ -32,7 +34,11 @@ export default function Login() {
         flex={0.5}
         align={'center'}
         justify={'space-between'}
+        position="relative"
       >
+        <Box pos="absolute" top="10vh" right="0" zIndex="-1">
+          <Image w="70%" src={gleaf} />
+        </Box>
         <Box py="5">
           <Logo />
         </Box>
@@ -72,6 +78,14 @@ export default function Login() {
         bgSize="cover"
         bgPos="center"
       ></Flex>
+      <Box
+        pos="absolute"
+        top="40vh"
+        left={['-70vw', '-40vw', '-35vw', '-20vw']}
+        zIndex="-1"
+      >
+        <Image src={yleaf} />
+      </Box>
     </Stack>
   );
 }
