@@ -64,10 +64,10 @@ function ManagerTalk() {
               <Text
                 as="p"
                 color="white"
-                font-weight="600"
-                letter-spacing="0"
-                white-space="nowrap"
-                font-size="14px"
+                fontWeight="600"
+                letterSpacing="0"
+                whiteSpace="nowrap"
+                fontSize="14px"
                 position="relative"
                 pl={3}
                 _before={{
