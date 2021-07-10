@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
   Box,
@@ -19,6 +19,11 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  Link as ServiceLink,
+  AccordionPanel,
 } from '@chakra-ui/react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
@@ -60,9 +65,6 @@ const NavBar = props => {
   );
 };
 function NavDrawer({ isOpen, onClose }) {
-  const { pathname } = useLocation();
-  const [open, setOpen] = useState();
-
   return (
     <>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
@@ -71,11 +73,7 @@ function NavDrawer({ isOpen, onClose }) {
           <DrawerCloseButton />
           <DrawerHeader>Menu</DrawerHeader>
 
-          <DrawerBody
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
+          <DrawerBody>
             <Stack
               align="center"
               justify={['center', 'space-between', 'flex-end', 'flex-end']}
@@ -84,73 +82,56 @@ function NavDrawer({ isOpen, onClose }) {
               {navLinks.map((l, i) => {
                 if (l.pathname === 'Services') {
                   return (
-                    <MenuItem key={i} color="black">
-                      <Menu isOpen={open}>
-                        <MenuButton
-                          onClick={e => {
-                            setOpen(!open);
-                            e.stopPropagation();
-                          }}
-                          as="a"
-                          fontWeight="500"
-                          px="0"
-                          transition="all 0.2s"
-                          borderRadius="md"
-                          _hover={{ bg: 'gray.400' }}
-                          _expanded={{ bg: 'blue.400' }}
-                          width="100px"
-                          _focus={{ boxShadow: 'outline' }}
-                        >
-                          Services
-                        </MenuButton>
-                        <MenuList>
-                          {products.map((p, i) => {
-                            return (
-                              <MenuItem
-                                color="black"
-                                _hover={{
-                                  bg: 'gray.100',
-                                }}
-                                onClick={() => {
-                                  setOpen(false);
-                                }}
-                              >
-                                <Link
+                    <MenuItem key={i} width="100%" color="black">
+                      <Accordion
+                        allowToggle
+                        width="100%"
+                        border="none"
+                        _before={{
+                          borderStyle: 'hidden',
+                        }}
+                      >
+                        <AccordionItem border="none" width="100%">
+                          <AccordionButton
+                            border="none"
+                            width="100%"
+                            _hover={{
+                              color: 'primary.100',
+                              bg: 'transparent',
+                            }}
+                          >
+                            <Box flex="1" textAlign="center">
+                              Services
+                            </Box>
+                          </AccordionButton>
+                          <AccordionPanel py={4} px="0" bg="gray.100">
+                            {products.map((p, i) => {
+                              return (
+                                <ServiceLink
+                                  onClick={onClose}
+                                  as={Link}
+                                  _hover={{
+                                    bg: 'gray.50',
+                                    color: 'primary.100',
+                                  }}
+                                  className="afont"
                                   style={{
                                     height: '100%',
+                                    textAlign: 'center',
                                     width: '100%',
                                     display: 'block',
                                     padding: '5px 20px',
-                                    color: 'inherit',
+                                    color: 'textDark.100',
                                   }}
                                   to={'/services' + p.path}
                                 >
                                   {p.shortTitle}
-                                </Link>
-                              </MenuItem>
-                            );
-                          })}
-                          {/* <MenuItem
-                            color="black"
-                            _hover={{
-                              bg: 'gray.100',
-                            }}
-                          >
-                            <Link
-                              style={{
-                                height: '100%',
-                                width: '100%',
-                                display: 'block',
-                                padding: '5px 20px',
-                                color: 'inherit',
-                              }}
-                              to="/services"
-                            >
-                              All Services
-                            </Link>
-                          </MenuItem> */}
-                        </MenuList>
-                      </Menu>
+                                </ServiceLink>
+                              );
+                            })}
+                          </AccordionPanel>
+                        </AccordionItem>
+                      </Accordion>
                     </MenuItem>
                   );
                 }

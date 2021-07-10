@@ -1,116 +1,108 @@
+/* eslint-disable eqeqeq */
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import FeaturedCards from '../components/Blog/FeaturedCards';
 import LatestArticle from '../components/Blog/LatestArticle';
 
-import herd from '../assets/blog/herd.jpg';
-import herd2 from '../assets/blog/herd2.jpg';
-import farmers from '../assets/blog/farmers.jpg';
-import farmers2 from '../assets/blog/farmers2.jpg';
-import foliage from '../assets/blog/foliage.jpeg';
-import cashew from '../assets/blog/cashew.jpg';
-import greenhouse from '../assets/blog/greenhouse.jpeg';
 import { Fade } from '@chakra-ui/transition';
+import baseURL from '../helpers/config';
+import axios from 'axios';
+import SkeletonLoaderBlog from '../components/Blog/SkeletonLoaderBlog';
+import { Center, Text } from '@chakra-ui/react';
+import Pagination from 'react-js-pagination';
+import ErrorAlert from '../components/Global/ErrorAlert';
 
 function BlogListingByCategory() {
-  const images = [farmers, farmers2, foliage, cashew, herd, herd2, greenhouse];
-
   let { category } = useParams();
-
-  // sample blog posts to display
-  const posts = {
-    latest: {
-      image: images[Math.floor(Math.random() * images.length)],
-      caption: 'Seven key roles in financial funding in farms',
-      author: 'Debo Ajiwhatever',
-      category: category,
-      sample:
-        'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum aliquid quidem delectus necessitatibus nesciunt in...',
-    },
-
-    posts: [
-      {
-        image: images[Math.floor(Math.random() * images.length)],
-        date: '12 Jun 2021',
-        sample:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum aliquid quidem delectus necessitatibus nesciunt in...',
-        author: 'Debo Ajikede',
-        category: category,
-
-        caption: 'Filling system for agricultural exports and its advantages',
-      },
-      {
-        image: images[Math.floor(Math.random() * images.length)],
-        date: '12 Jun 2021',
-        sample:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum aliquid quidem delectus necessitatibus nesciunt in...',
-        author: 'Debo Ajikede',
-        category: category,
-
-        caption: 'Cyber attack on virtual  farms : The 2021 report analysis',
-      },
-      {
-        image: images[Math.floor(Math.random() * images.length)],
-        date: '12 Jun 2021',
-        sample:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum aliquid quidem delectus necessitatibus nesciunt in...',
-        author: 'Debo Ajikede',
-        category: category,
-
-        caption: 'Seven key roles in financial funding in farms',
-      },
-      {
-        image: images[Math.floor(Math.random() * images.length)],
-        date: '12 Jun 2021',
-        sample:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum aliquid quidem delectus necessitatibus nesciunt in...',
-        author: 'Debo Ajikede',
-        category: 'Technology',
-        caption: 'Filling system for agricultural exports and its advantages',
-      },
-      {
-        image: images[Math.floor(Math.random() * images.length)],
-        date: '12 Jun 2021',
-        sample:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum aliquid quidem delectus necessitatibus nesciunt in...',
-        author: 'Debo Ajikede',
-        category: category,
-
-        caption: 'Cyber attack on virtual  farms : The 2021 report analysis',
-      },
-      {
-        image: images[Math.floor(Math.random() * images.length)],
-        date: '12 Jun 2021',
-        sample:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum aliquid quidem delectus necessitatibus nesciunt in...',
-        author: 'Debo Ajikede',
-        category: category,
-
-        caption: 'Seven key roles in financial funding in farms',
-      },
-    ],
-  };
-
   const [loadingCategoryPosts, setLoadingCategoryPosts] = useState(false);
+  const [articles, setArticles] = useState([]);
+  const [articlesData, setArticlesData] = useState([]);
+  const [error, setError] = useState(false);
+
+  const FetchCategoryArticles = async (page = 1) => {
+    setLoadingCategoryPosts(true);
+    setError(null);
+    try {
+      const dt = await axios.get(baseURL + '/article-category/' + category);
+      const { data } = dt.data;
+      setArticles(data);
+      setArticlesData(dt.data);
+      setLoadingCategoryPosts(false);
+    } catch (error) {
+      setError(error.message);
+      setLoadingCategoryPosts(false);
+    }
+  };
 
   useEffect(() => {
     document.title = 'Blog';
-    setLoadingCategoryPosts(true);
-    setTimeout(() => {
-      setLoadingCategoryPosts(false);
-    }, 3000);
+    FetchCategoryArticles();
+    //eslint-disable-next-line
   }, [category]);
 
   return (
     <Fade in>
-      <LatestArticle
-        latestPost={posts.latest}
-        loadingCategoryPosts={!loadingCategoryPosts}
-      />
-      <FeaturedCards
-        posts={posts.posts}
-        loadingCategoryPosts={!loadingCategoryPosts}
-      />
+      <>
+        {loadingCategoryPosts && <SkeletonLoaderBlog />}
+        {!loadingCategoryPosts && error && (
+          <ErrorAlert
+            title="Something went wrong!"
+            // message="A network  error may have occurred, please"
+            message={error || 'A network  error may have occurred, please'}
+            retryFunc={() => window.location.reload()}
+          />
+        )}
+        {!loadingCategoryPosts && !error && articles.length == 0 && (
+          <ErrorAlert
+            title="Empty Barn!"
+            type="info"
+            message="There are no articles for this selected category"
+            retryFunc={() => window.location.reload()}
+          />
+        )}
+
+        {!loadingCategoryPosts && !error && articlesData && articlesData.meta && (
+          <>
+            {articlesData.meta.current_page == 1 && (
+              <>
+                <LatestArticle latestPost={articles[0]} />
+                <FeaturedCards posts={articles.slice(1, articles.length)} />
+              </>
+            )}
+
+            {articlesData.meta.current_page != 1 && (
+              <FeaturedCards posts={articles} />
+            )}
+          </>
+        )}
+        <Center py="10" bg="white" flexDir="column">
+          {!loadingCategoryPosts &&
+            !error &&
+            articlesData &&
+            articlesData.meta &&
+            articles.length !== 0 &&
+            articlesData.meta.current_page == articlesData.meta.last_page && (
+              <Text as="p">--- End ---</Text>
+            )}{' '}
+          {!loadingCategoryPosts &&
+            !error &&
+            articlesData &&
+            articlesData.meta &&
+            articles.length !== 0 && (
+              <Pagination
+                totalItemsCount={articlesData.meta.total}
+                activePage={articlesData.meta.current_page}
+                itemsCountPerPage={articlesData.meta.per_page}
+                itemClass="pagination-item"
+                linkClass="pagination-link"
+                firstPageText="<<"
+                lastPageText=">>"
+                onChange={pageNumber => FetchCategoryArticles(pageNumber)}
+              />
+            )}
+        </Center>
+      </>
     </Fade>
   );
 }

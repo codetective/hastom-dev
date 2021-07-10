@@ -65,10 +65,10 @@ function ProductCard({ p }) {
           <Text
             as="small"
             color="#3eb900"
-            font-weight="600"
-            letter-spacing="0"
-            white-space="nowrap"
-            font-size="15px"
+            fontWeight="600"
+            letterSpacing="0"
+            whiteSpace="nowrap"
+            fontSize="15px"
             textTransform="capitalize"
           >
             {p.catchPhrase}

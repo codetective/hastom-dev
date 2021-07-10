@@ -18,10 +18,10 @@ export default function OurStory() {
           <Text
             as="p"
             color="#3eb900"
-            font-weight="600"
-            letter-spacing="0"
-            white-space="nowrap"
-            font-size="14px"
+            fontWeight="600"
+            letterSpacing="0"
+            whiteSpace="nowrap"
+            fontSize="14px"
             p={0}
           >
             Our Journey

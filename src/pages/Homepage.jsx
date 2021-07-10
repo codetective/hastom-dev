@@ -1,5 +1,6 @@
 import { Fade } from '@chakra-ui/transition';
 import { useEffect } from 'react';
+import OurServices from '../components/About/OurServices';
 import About from '../components/Home/About';
 import FAQ from '../components/Home/Faq';
 import Features from '../components/Home/Features';
@@ -15,6 +16,7 @@ function Homepage() {
     <Fade in>
       <Header />
       <About />
+      <OurServices />
       <ManagerTalk />
       <Features />
       <FAQ />

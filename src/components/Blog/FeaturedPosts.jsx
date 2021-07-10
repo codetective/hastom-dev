@@ -1,33 +1,10 @@
 import { Divider, Flex, Stack, Text, Container } from '@chakra-ui/layout';
 import React from 'react';
-import greenhouse from '../../assets/blog/greenhouse.jpeg';
-import cows from '../../assets/blog/cows.jpg';
-import holdleaf from '../../assets/blog/holdleaf.jpg';
+
 import { AuthorCategory } from './LatestArticle';
 import { Image, Box, Heading } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
-
-const posts = [
-  {
-    image: greenhouse,
-    author: 'Debo Ajikede',
-    category: 'Farming',
-    caption: 'Seven key roles in financial funding in farms',
-  },
-  {
-    image: cows,
-    author: 'Debo Ajikede',
-    category: 'Technology',
-    caption: 'Filling system for agricultural exports and its advantages',
-  },
-  {
-    image: holdleaf,
-    author: 'Debo Ajikede',
-    category: 'Technology',
-    caption: 'Cyber attack on virtual  farms : The 2021 report analysis',
-  },
-];
 
 const popular = [
   {
@@ -124,7 +101,7 @@ export const PopularPosts = ({ popular, ...rest }) => {
   );
 };
 
-function FeaturedPosts() {
+function FeaturedPosts({ articles }) {
   return (
     <Container maxW="container.xl" px={8}>
       <Flex
@@ -133,7 +110,7 @@ function FeaturedPosts() {
         flexDirection={['column', 'column', 'row', 'row']}
       >
         <Stack spacing="40px" pt="40px">
-          {posts.map((post, index) => {
+          {articles.map((post, index) => {
             return (
               <Flex key={index}>
                 <Flex>
@@ -150,12 +127,13 @@ function FeaturedPosts() {
                     <Link
                       textDecoration="none"
                       _hover={{ textDecoration: 'none' }}
+                      to={`/blog/${post.category.category}/${post.uuid}`}
                     >
                       <Image
                         borderRadius="3px"
                         margin="auto"
-                        src={post.image}
-                        alt="some good alt text"
+                        src={post.images[0].location}
+                        alt={post.title}
                         objectFit={['cover', 'cover']}
                         width="100%"
                         height="100%"
@@ -183,9 +161,10 @@ function FeaturedPosts() {
                       <Link
                         className="afont"
                         textDecoration="none"
+                        to={`/blog/${post.category.category}/${post.uuid}`}
                         _hover={{ textDecoration: 'none' }}
                       >
-                        {post.caption}
+                        {post.title}
                       </Link>
                     </Heading>
                   </Stack>
