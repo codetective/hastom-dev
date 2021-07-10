@@ -2,21 +2,27 @@ import React from 'react';
 import {
   Box,
   Heading,
-  Link,
+  Link as PostLink,
   Image,
   Text,
   Container,
-  Skeleton,
-  SkeletonText,
 } from '@chakra-ui/react';
 import bloghead from '../../assets/bloghead.jpg';
+import { stateToHTML } from 'draft-js-export-html';
+import { convertFromRaw } from 'draft-js';
+import { Link } from 'react-router-dom';
+
+function convertContentFromJSONToHTML(text) {
+  let blocks = JSON.parse(text);
+  return stateToHTML(convertFromRaw(blocks));
+}
 
 const AuthorCategory = props => {
   return (
     <Box id="author-category" className="qfont" pl={6}>
       <Text
         as={Link}
-        href={`/blog/${props.category}`}
+        to={`/blog/${props.category.uuid}`}
         // as="small"
         fontWeight="normal"
         fontSize="14px"
@@ -25,10 +31,10 @@ const AuthorCategory = props => {
         textDecoration="none"
         _hover={{ textDecoration: 'none' }}
       >
-        {props.category}
+        {props.category.category || 'EMPTY'}
       </Text>
       <Text as="p" color="textDark.100" fontSize="14px">
-        By {props.author}
+        By {props.author.name}
       </Text>
     </Box>
   );
@@ -36,7 +42,7 @@ const AuthorCategory = props => {
 
 const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
   return (
-    <Container maxW="container.xl" px={8}>
+    <Container maxW="container.xl" px={8} pb="4">
       <Box
         pt={10}
         display="flex"
@@ -53,32 +59,25 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
           alignItems="center"
           w="100%"
         >
-          <Skeleton
-            isLoaded={latestPost ? loadingCategoryPosts : true}
-            w="100%"
-          >
-            <Box width={{ base: '100%', sm: '100%' }}>
-              <Link
-                href={
-                  latestPost
-                    ? `/blog/${latestPost.category}/${latestPost.caption}`
-                    : '/blog/updates/test'
-                }
-                textDecoration="none"
-                _hover={{ textDecoration: 'none' }}
-              >
-                <Image
-                  margin="auto"
-                  borderRadius="lg"
-                  src={latestPost ? latestPost.image : bloghead}
-                  alt="some good alt text"
-                  objectFit={['contain', 'cover']}
-                  width="100%"
-                  height="100%"
-                />
-              </Link>
-            </Box>
-          </Skeleton>
+          <Box width={{ base: '100%', sm: '100%' }} h="300px">
+            <PostLink
+              h="300px"
+              as={Link}
+              to={`/blog/${latestPost.category.category}/${latestPost.uuid}`}
+              textDecoration="none"
+              _hover={{ textDecoration: 'none' }}
+            >
+              <Image
+                margin="auto"
+                borderRadius="lg"
+                src={latestPost.images[0].location || bloghead}
+                alt={latestPost.title}
+                objectFit={'cover'}
+                width="100%"
+                height="100%"
+              />
+            </PostLink>
+          </Box>
         </Box>
 
         <Box
@@ -87,78 +86,57 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
           justifyContent="center"
           marginTop={{ base: '3', sm: '0' }}
         >
-          <Skeleton isLoaded={latestPost ? loadingCategoryPosts : true}>
-            <AuthorCategory
-              category={latestPost ? latestPost.category : 'Economics'}
-              author={latestPost ? latestPost.author : 'Debo Ajikede'}
-            />
-          </Skeleton>
+          <AuthorCategory
+            category={latestPost.category}
+            author={latestPost.author}
+          />
 
-          <SkeletonText
-            mt="4"
-            noOfLines={4}
-            spacing="4"
-            isLoaded={latestPost ? loadingCategoryPosts : true}
+          <Heading
+            marginTop="1"
+            className="qfont"
+            py={1}
+            fontSize={['32px !important', '40px !important']}
           >
-            <Heading
-              marginTop="1"
-              className="qfont"
-              py={1}
-              fontSize={['32px !important', '40px !important']}
-            >
-              <Link
-                className="afont"
-                textDecoration="none"
-                fontWeight="bold !important"
-                _hover={{ textDecoration: 'none' }}
-                href={
-                  latestPost
-                    ? `/blog/${latestPost.category}/${latestPost.caption}`
-                    : '/blog/updates/test'
-                }
-              >
-                {latestPost
-                  ? latestPost.caption
-                  : 'Global News crisis southern vast ban on open grazing'}
-              </Link>
-            </Heading>
-          </SkeletonText>
-
-          <SkeletonText
-            mt="4"
-            noOfLines={2}
-            spacing="4"
-            isLoaded={latestPost ? loadingCategoryPosts : true}
-            display={['none', 'none', 'none', 'block']}
-          >
-            <Text
-              pb={4}
-              as="p"
-              marginTop="2"
-              color="textDark"
-              fontSize="md"
-              lineHeight="1.9"
-            >
-              {latestPost
-                ? latestPost.sample
-                : 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
-            </Text>
-
-            <Link
+            <PostLink
+              as={Link}
+              className="afont"
               textDecoration="none"
+              fontWeight="bold !important"
               _hover={{ textDecoration: 'none' }}
-              color="#f8b458"
-              fontWeight="bold"
-              className="qfont"
-              href={
-                latestPost
-                  ? `/blog/${latestPost.category}/${latestPost.caption}`
-                  : '/blog/updates/test'
-              }
+              to={`/blog/${latestPost.category.category}/${latestPost.uuid}`}
             >
-              Read more
-            </Link>
-          </SkeletonText>
+              {latestPost.title}
+            </PostLink>
+          </Heading>
+
+          <Box
+            display={['block', 'block', 'none', 'block']}
+            id="conntent-box"
+            color="textDark.100"
+            py={'15px'}
+            height="100px"
+            className="line-clamp"
+          >
+            <Box
+              dangerouslySetInnerHTML={{
+                __html: convertContentFromJSONToHTML(latestPost.content),
+              }}
+            />
+          </Box>
+
+          <PostLink
+            display={['block', 'block', 'none', 'block']}
+            py="2"
+            as={Link}
+            textDecoration="none"
+            _hover={{ textDecoration: 'none' }}
+            color="#f8b458"
+            fontWeight="bold"
+            className="qfont"
+            to={`/blog/${latestPost.category.category}/${latestPost.uuid}`}
+          >
+            Read more
+          </PostLink>
         </Box>
       </Box>
     </Container>
@@ -166,4 +144,4 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
 };
 
 export default LatestArticle;
-export { AuthorCategory };
+export { AuthorCategory, convertContentFromJSONToHTML };

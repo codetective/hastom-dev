@@ -29,7 +29,7 @@ const Feature = ({ title, text, icon }) => {
       <Text color="textDarkest.100" fontWeight={700}>
         {title}
       </Text>
-      <Text font-size="14px" color={'gray.600'}>
+      <Text fontSize="14px" color={'gray.600'}>
         {text}
       </Text>
     </Stack>
@@ -44,10 +44,10 @@ function Features() {
           <Text
             as="p"
             color="#3eb900"
-            font-weight="600"
-            letter-spacing="0"
-            white-space="nowrap"
-            font-size="14px"
+            fontWeight="600"
+            letterSpacing="0"
+            whiteSpace="nowrap"
+            fontSize="14px"
             p={0}
           >
             Don't settle for less

@@ -1,4 +1,3 @@
-import { Image } from '@chakra-ui/image';
 import { Box, Center, Heading, Stack, Text } from '@chakra-ui/layout';
 
 //staff card component

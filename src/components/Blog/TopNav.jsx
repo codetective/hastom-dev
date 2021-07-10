@@ -16,8 +16,11 @@ import { NavLink } from 'react-router-dom';
 import { MenuItem } from '../Nav/Navbar';
 import { BiSearchAlt } from 'react-icons/bi';
 import { AiTwotoneAppstore } from 'react-icons/ai';
+import { useGenCtx } from '../../context/GeneralContext';
 
 function TopNav() {
+  const { categories } = useGenCtx();
+
   return (
     <Container maxW="container.xl" px={8}>
       <Flex justifyContent="space-between">
@@ -29,6 +32,7 @@ function TopNav() {
           direction={['row', 'row', 'row', 'row']}
           pt={[4, 4, 0, 0]}
         >
+          {' '}
           <MenuItem color="textDark">
             <NavLink
               activeClassName="nav-active-blog"
@@ -38,65 +42,35 @@ function TopNav() {
 
                 transition: 'all .3s ease',
               }}
-              to="/blog"
+              to={'/blog'}
             >
               Latest
             </NavLink>
           </MenuItem>
-          <MenuItem color="textDark">
-            <NavLink
-              activeClassName="nav-active-blog"
-              style={{
-                padding: '0 0 16px 0',
+          {categories.map((c, i) => {
+            return (
+              <MenuItem key={i} color="textDark">
+                <NavLink
+                  activeClassName="nav-active-blog"
+                  exact
+                  style={{
+                    padding: '0 0 16px 0',
 
-                transition: 'all .3s ease',
-              }}
-              to="/blog/economics"
-            >
-              Economics
-            </NavLink>
-          </MenuItem>
-          <MenuItem color="textDark">
-            <NavLink
-              activeClassName="nav-active-blog"
-              style={{
-                padding: '0 0 16px 0',
-
-                transition: 'all .3s ease',
-              }}
-              to="/blog/farming"
-            >
-              Farming
-            </NavLink>
-          </MenuItem>
-          <MenuItem color="textDark">
-            <NavLink
-              activeClassName="nav-active-blog"
-              style={{
-                padding: '0 0 16px 0',
-
-                transition: 'all .3s ease',
-              }}
-              to="/blog/technology"
-            >
-              Technology
-            </NavLink>
-          </MenuItem>
-          <MenuItem color="textDark">
-            <NavLink
-              activeClassName="nav-active-blog"
-              style={{
-                padding: '0 0 16px 0',
-
-                transition: 'all .3s ease',
-              }}
-              to="/blog/updates"
-            >
-              Updates
-            </NavLink>
-          </MenuItem>
+                    transition: 'all .3s ease',
+                  }}
+                  to={'/blog/' + c.uuid}
+                >
+                  {c.category}
+                </NavLink>
+              </MenuItem>
+            );
+          })}
         </Stack>
-        <HStack ml="auto">
+        <HStack
+          ml="auto"
+          width={['100%', '100%', 'fit-content']}
+          justifyContent={['space-between', 'space-between', 'normal']}
+        >
           <Menu isLazy zIndex="999">
             <MenuButton
               as={Button}
@@ -135,65 +109,26 @@ function TopNav() {
                   Latest
                 </NavLink>
               </ChakraMenuItem>
-              <ChakraMenuItem p="0" color="textDark">
-                <NavLink
-                  activeClassName="nav-active-blog"
-                  exact
-                  style={{
-                    padding: '5px 16px 16px 16px',
 
-                    transition: 'all .3s ease',
-                    width: '100%',
-                  }}
-                  to="/blog/economics"
-                >
-                  Economics
-                </NavLink>
-              </ChakraMenuItem>
-              <ChakraMenuItem p="0" color="textDark">
-                <NavLink
-                  activeClassName="nav-active-blog"
-                  exact
-                  style={{
-                    padding: '5px 16px 16px 16px',
+              {categories.map((c, i) => {
+                return (
+                  <ChakraMenuItem p="0" key={i} color="textDark">
+                    <NavLink
+                      activeClassName="nav-active-blog"
+                      exact
+                      style={{
+                        padding: '5px 16px 16px 16px',
 
-                    transition: 'all .3s ease',
-                    width: '100%',
-                  }}
-                  to="/blog/farming"
-                >
-                  Farming
-                </NavLink>
-              </ChakraMenuItem>
-              <ChakraMenuItem p="0" color="textDark">
-                <NavLink
-                  activeClassName="nav-active-blog"
-                  exact
-                  style={{
-                    padding: '5px 16px 16px 16px',
-
-                    transition: 'all .3s ease',
-                    width: '100%',
-                  }}
-                  to="/blog/technology"
-                >
-                  Technology
-                </NavLink>
-              </ChakraMenuItem>
-              <ChakraMenuItem p="0" color="textDark">
-                <NavLink
-                  activeClassName="nav-active-blog"
-                  style={{
-                    padding: '5px 16px 16px 16px',
-
-                    transition: 'all .3s ease',
-                    width: '100%',
-                  }}
-                  to="/blog/updates"
-                >
-                  Updates
-                </NavLink>
-              </ChakraMenuItem>
+                        transition: 'all .3s ease',
+                        width: '100%',
+                      }}
+                      to={'/blog/' + c.uuid}
+                    >
+                      {c.category}
+                    </NavLink>
+                  </ChakraMenuItem>
+                );
+              })}
             </MenuList>
           </Menu>
 
