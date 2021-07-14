@@ -25,9 +25,11 @@ export default function ErrorAlert({ type, title, message, retryFunc }) {
       <AlertDescription maxWidth="sm">
         {message}
         <br />{' '}
-        <Button onClick={retryFunc} colorScheme="green" variant="outline">
-          RETRY
-        </Button>
+        {retryFunc && (
+          <Button onClick={retryFunc} colorScheme="green" variant="outline">
+            RETRY
+          </Button>
+        )}
       </AlertDescription>
     </Alert>
   );

@@ -314,7 +314,7 @@ ul li {
   margin-left: 20px;
 }
 .blog-content-box > ul > li::before {
-  content: '🟢';
+  content: '🟠';
   margin-left: -20px;
   font-size: 8px;
   margin-right: 10px;

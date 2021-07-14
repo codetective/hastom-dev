@@ -26,11 +26,16 @@ function BlogListingByCategory() {
     try {
       const dt = await axios.get(baseURL + '/article-category/' + category);
       const { data } = dt.data;
-      setArticles(data);
-      setArticlesData(dt.data);
-      setLoadingCategoryPosts(false);
+      if (data.error) {
+        setError(true);
+        setLoadingCategoryPosts(false);
+      } else {
+        setArticles(data);
+        setArticlesData(dt.data);
+        setLoadingCategoryPosts(false);
+      }
     } catch (error) {
-      setError(error.message);
+      setError(true);
       setLoadingCategoryPosts(false);
     }
   };
@@ -49,8 +54,9 @@ function BlogListingByCategory() {
           <ErrorAlert
             title="Something went wrong!"
             // message="A network  error may have occurred, please"
-            message={error || 'A network  error may have occurred, please'}
-            retryFunc={() => window.location.reload()}
+            message={
+              'Sorry, cannot find resource. It may have been removed by an administrator.'
+            }
           />
         )}
         {!loadingCategoryPosts && !error && articles.length == 0 && (
@@ -62,20 +68,24 @@ function BlogListingByCategory() {
           />
         )}
 
-        {!loadingCategoryPosts && !error && articlesData && articlesData.meta && (
-          <>
-            {articlesData.meta.current_page == 1 && (
-              <>
-                <LatestArticle latestPost={articles[0]} />
-                <FeaturedCards posts={articles.slice(1, articles.length)} />
-              </>
-            )}
+        {!loadingCategoryPosts &&
+          !error &&
+          articles.length !== 0 &&
+          articlesData &&
+          articlesData.meta && (
+            <>
+              {articlesData.meta.current_page == 1 && (
+                <>
+                  <LatestArticle latestPost={articles[0]} />
+                  <FeaturedCards posts={articles.slice(1, articles.length)} />
+                </>
+              )}
 
-            {articlesData.meta.current_page != 1 && (
-              <FeaturedCards posts={articles} />
-            )}
-          </>
-        )}
+              {articlesData.meta.current_page != 1 && (
+                <FeaturedCards posts={articles} />
+              )}
+            </>
+          )}
         <Center py="10" bg="white" flexDir="column">
           {!loadingCategoryPosts &&
             !error &&

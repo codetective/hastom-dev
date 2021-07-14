@@ -46,6 +46,7 @@ function Blogpage() {
 
             {!loadingArticles &&
               !errorArticles &&
+              articles.length !== 0 &&
               articlesData &&
               articlesData.meta && (
                 <>

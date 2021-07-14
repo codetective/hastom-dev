@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   Box,
@@ -16,10 +16,14 @@ import { shuffleArray } from '../../helpers';
 
 function LabCorner() {
   const { articles, errorArticles, loadingArticles } = useGenCtx();
+  const [shuffled, setShuffled] = useState([]);
 
+  useEffect(() => {
+    setShuffled(shuffleArray(articles).slice(1, 4));
+  }, [articles]);
   return (
     <>
-      {!loadingArticles && !errorArticles && (
+      {!loadingArticles && !errorArticles && shuffled.length !== 0 && (
         <Box bg="white" py="80px">
           <Container maxW="container.xl" px={8}>
             <HStack justify="space-between">
@@ -64,7 +68,7 @@ function LabCorner() {
             </HStack>
           </Container>
 
-          <FeaturedCards posts={shuffleArray(articles).slice(1, 4)} pt="3" />
+          <FeaturedCards posts={shuffled} pt="3" />
           <Container maxW="container.xl" px={8}>
             <Stack alignItems="flex-end" pb="2" pt={10}>
               <Text
