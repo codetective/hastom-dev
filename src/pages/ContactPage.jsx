@@ -11,9 +11,10 @@ import {
   InputLeftElement,
   Icon,
   Textarea,
+  Flex,
 } from '@chakra-ui/react';
-import { MdContacts } from 'react-icons/md';
-import { FaUserCircle } from 'react-icons/fa';
+import { MdContacts, MdLocationOn } from 'react-icons/md';
+import { FaPhoneAlt, FaUserCircle } from 'react-icons/fa';
 
 export default function ContactPage() {
   return (
@@ -40,8 +41,8 @@ export default function ContactPage() {
             </Text>
           </Heading>
           <Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum quas
-            distinctio beatae doloremque debitis, est dolor doloribus sunt.
+            Please contact us using this form if you have any questions or
+            comments about Hastom.
           </Text>
         </Stack>
         <Box as={'form'} mt={10}>
@@ -108,6 +109,64 @@ export default function ContactPage() {
               Submit
             </Button>
           </Stack>
+        </Box>
+
+        <Box w="full" minH="500px" pt="80px">
+          <Heading
+            className="afont"
+            color={'textDark.100'}
+            lineHeight={1.1}
+            fontSize="20px"
+          >
+            You can Find us at:
+          </Heading>
+          <Stack py="5">
+            <Box>
+              <Flex alignItems="center">
+                <Box as="span" color="secondary.100" pr="2">
+                  <MdLocationOn />
+                </Box>
+                <Text color="secondary.100" fontWeight="bold">
+                  Address
+                </Text>
+              </Flex>
+              <Text color="textDark.100" as="p">
+                Hastom Cashew Center, Adebayo Alata.
+              </Text>
+              <Text as="p">Industrial Layout, Ogbomoso, Oyo State.</Text>
+            </Box>
+            <Box>
+              <Flex alignItems="center">
+                <Box as="span" color="secondary.100" pr="2">
+                  <FaPhoneAlt />
+                </Box>
+                <Text color="secondary.100" fontWeight="bold">
+                  Contact
+                </Text>
+              </Flex>
+              <Text color="textDark.100" as="p">
+                <a href="tel:+2348163013001">(+234) 8163013001</a>
+              </Text>
+              <Text color="textDark.100" as="p">
+                <a href="mailto:hello@hastomnigeria.com">
+                  hello@hastomnigeria.com
+                </a>
+              </Text>
+            </Box>
+          </Stack>
+          <div class="gmap_canvas">
+            <iframe
+              width="100%"
+              height="500px"
+              title="Hastom Location"
+              id="gmap_canvas"
+              src="https://maps.google.com/maps?q=Hastom%20Cashew%20Center,%20Adebayo%20Alata%20Industrial%20Layout,%20Ogbomoso,%20Oyo%20State.&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              frameborder="0"
+              scrolling="no"
+              marginheight="0"
+              marginwidth="0"
+            ></iframe>
+          </div>
         </Box>
       </Stack>
     </Container>

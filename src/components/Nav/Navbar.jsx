@@ -124,7 +124,7 @@ function NavDrawer({ isOpen, onClose }) {
                                     padding: '5px 20px',
                                     color: 'textDark.100',
                                   }}
-                                  to={'/services' + p.path}
+                                  to={p.path}
                                 >
                                   {p.shortTitle}
                                 </ServiceLink>
@@ -283,7 +283,7 @@ const MenuLinks = ({ isOpen }) => {
                               padding: '5px 20px',
                               color: 'inherit',
                             }}
-                            to={'/services' + p.path}
+                            to={p.path}
                           >
                             {p.shortTitle}
                           </Link>

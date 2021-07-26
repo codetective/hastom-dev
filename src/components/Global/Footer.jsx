@@ -15,30 +15,15 @@ import {
   Text,
   Stack,
   VStack,
+  Link as ServiceLink,
   Flex,
+  Collapse,
+  useDisclosure,
 } from '@chakra-ui/react';
-
-const links1 = [
-  {
-    page: 'Home',
-    route: '/',
-  },
-
-  {
-    page: 'About',
-    route: '/about',
-  },
-  {
-    page: 'Services',
-    route: '/services',
-  },
-  {
-    page: 'Blog',
-    route: '/blog',
-  },
-];
+import products from '../../helpers/products';
 
 function Footer() {
+  const { isOpen, onToggle } = useDisclosure();
   return (
     <Box py={'80px'} bg="#222222">
       <Container maxW="container.xl" px={8}>
@@ -126,13 +111,47 @@ function Footer() {
             pt="4"
           >
             <VStack spacing="15px">
-              {links1.map((l, i) => {
-                return (
-                  <Link to={l.route} key={i}>
-                    <Text color="textDark.100">{l.page}</Text>
-                  </Link>
-                );
-              })}
+              <Link to={'/'}>
+                <Text color="textDark.100">Home</Text>
+              </Link>
+              <Text cursor="pointer" onClick={onToggle}>
+                Services
+              </Text>
+              <Collapse in={isOpen} animateOpacity>
+                <Box p="5px" color="white" rounded="md" shadow="md">
+                  {products.map((p, i) => {
+                    return (
+                      <ServiceLink
+                        key={i}
+                        onClick={onToggle}
+                        as={Link}
+                        _hover={{
+                          bg: 'gray.50',
+                          color: 'primary.100',
+                        }}
+                        className="afont"
+                        style={{
+                          height: '100%',
+                          textAlign: 'center',
+                          width: '100%',
+                          display: 'block',
+                          padding: '5px 20px',
+                          color: 'textDark.100',
+                        }}
+                        to={p.path}
+                      >
+                        {p.shortTitle}
+                      </ServiceLink>
+                    );
+                  })}
+                </Box>
+              </Collapse>
+              <Link to={'/about'}>
+                <Text color="textDark.100">About</Text>
+              </Link>
+              <Link to={'/blog'}>
+                <Text color="textDark.100">Blog</Text>
+              </Link>
             </VStack>
           </Stack>
 

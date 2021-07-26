@@ -27,12 +27,12 @@ export default function BottomCTA() {
             color="white"
           >
             <Box as="span" class="span">
-              Invest with Hastom today <br /> with a bold step you can <br /> do
-              everything easily
+              Begin your fulfilling Agricultural and Real Estate experience with
+              Hastom
             </Box>
           </Heading>
           <Box>
-            <Link to="/login">
+            <Link to="/contact">
               <Button
                 size="sm"
                 rounded="34px"

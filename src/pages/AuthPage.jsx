@@ -1,5 +1,5 @@
 import { Flex, Stack, Image, Box, HStack } from '@chakra-ui/react';
-import { FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaYoutube } from 'react-icons/fa';
 import { Route, Switch } from 'react-router-dom';
 import loginScreen from '../assets/loginScreen.jpg';
 import LoginForm from '../components/Auth/LoginForm';
@@ -11,16 +11,16 @@ import yleaf from '../assets/header/y-leaf.png';
 
 const socialIcons = [
   {
-    icon: <FaTwitter />,
-    link: '##',
+    icon: <FaYoutube />,
+    link: 'https://www.youtube.com/channel/UCUBf8cW3e01bNn6cmsQGRgg',
   },
   {
-    icon: <FaLinkedinIn />,
-    link: '##',
+    icon: <FaFacebook />,
+    link: 'https://web.facebook.com/hastomnigeria/',
   },
   {
     icon: <FaInstagram />,
-    link: '##',
+    link: 'https://www.instagram.com/hastomnigeria/',
   },
 ];
 
@@ -51,8 +51,10 @@ export default function Login() {
         <HStack spacing="30px" w="90%" py="5">
           {socialIcons.map((s, i) => (
             <Box
+              as="a"
+              href={s.link}
               key={i}
-              as="span"
+              target="_blank"
               transition="all .3s ease"
               _hover={{
                 color: 'primary.100',

@@ -8,12 +8,16 @@ import Homepage from './pages/Homepage';
 import customTheme from './helpers/theme';
 import Blogpage from './pages/Blogpage';
 import AuthPage from './pages/AuthPage';
-import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 import ScrollToTop from './helpers/ScrollToTop';
 import ContactPage from './pages/ContactPage';
 import GeneralProvider from './context/GeneralContext';
 import NotFoundPage from './pages/404Page';
+import CashewServicePage from './pages/CashewServicePage';
+import CattleRanchServicePage from './pages/CattleRanchingServicePage';
+import AgricInstituteServicePage from './pages/AgricInstituteServicePage';
+import BeefProcessingServicePage from './pages/BeefProcessingServicePage';
+import FarmLandsServicePage from './pages/FarmLandsServicePage';
 
 function App() {
   return (
@@ -26,10 +30,22 @@ function App() {
               <Route exact path="/about" component={AboutPage} />
               <Route exact path="/blog" component={Blogpage} />
               <Route exact path="/contact" component={ContactPage} />
+              <Route exact path="/cashew-farm" component={CashewServicePage} />
               <Route
                 exact
-                path={['/services', '/services/:route']}
-                component={ServicesPage}
+                path="/agricultural-institute"
+                component={AgricInstituteServicePage}
+              />
+              <Route
+                exact
+                path="/beef-processing"
+                component={BeefProcessingServicePage}
+              />
+              <Route exact path="/farmlands" component={FarmLandsServicePage} />
+              <Route
+                exact
+                path="/cattle-ranch"
+                component={CattleRanchServicePage}
               />
               <Route
                 exact
