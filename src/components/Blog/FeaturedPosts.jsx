@@ -115,31 +115,24 @@ function FeaturedPosts({ articles }) {
               <Flex key={index}>
                 <Flex>
                   <Box
+                    as={Link}
+                    to={`/blog/${post.category.category}/${post.uuid}`}
                     minWidth={['100px', '200px']}
                     maxWidth={['100px', '200px']}
-                    display={['none', 'none', 'none', 'block']}
+                    display={['none', 'block', 'block', 'block']}
                     mr={['10px', '25px']}
-                    minHeight="130px"
-                    maxHeight="140px"
                     zIndex="2"
                     rounded="0"
                   >
-                    <Link
-                      textDecoration="none"
-                      _hover={{ textDecoration: 'none' }}
-                      to={`/blog/${post.category.category}/${post.uuid}`}
-                    >
-                      <Image
-                        borderRadius="3px"
-                        margin="auto"
-                        src={post.images[0].location}
-                        alt={post.title}
-                        objectFit={['cover', 'cover']}
-                        width="100%"
-                        height="100%"
-                        display={['none', 'block']}
-                      />
-                    </Link>
+                    <Image
+                      borderRadius="3px"
+                      margin="auto"
+                      src={post.images[0].location}
+                      alt={post.title}
+                      width="100%"
+                      // height="100%"
+                      display={['none', 'block']}
+                    />
                   </Box>
 
                   <Stack>
@@ -151,9 +144,9 @@ function FeaturedPosts({ articles }) {
                       // className="qfont"
                       lineHeight="1.5"
                       fontSize={[
-                        '20px',
-                        '20px',
                         '20px !important',
+                        '20px !important',
+                        '24px !important',
                         '24px !important',
                       ]}
                       fontWeight="500"
@@ -174,7 +167,7 @@ function FeaturedPosts({ articles }) {
           })}
         </Stack>
 
-        <PopularPosts popular={popular} />
+        {/* <PopularPosts popular={popular} /> */}
       </Flex>
     </Container>
   );

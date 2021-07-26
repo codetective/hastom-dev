@@ -31,30 +31,15 @@ import SkeletonLoaderBlog from '../components/Blog/SkeletonLoaderBlog';
 import ErrorAlert from '../components/Global/ErrorAlert';
 import { useClipboard } from '@chakra-ui/react';
 import HelmetForSEO from '../helpers/HelmetForSEO';
-const popular = [
-  {
-    date: '11/07/2020',
-    caption: 'Filling system for agricultural exports and its advantages',
-  },
-  {
-    date: '11/07/2020',
-    caption: 'Filling system for agricultural exports and its advantages',
-  },
-  {
-    date: '11/07/2020',
-    caption: 'Filling system for agricultural exports and its advantages',
-  },
-  {
-    date: '11/07/2020',
-    caption: 'Filling system for agricultural exports and its advantages',
-  },
-];
+import { useGenCtx } from '../context/GeneralContext';
+
 function BlogRead() {
   let { article } = useParams();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   const { hasCopied, onCopy } = useClipboard(window.location);
+  const { articles } = useGenCtx();
 
   const FetchArticle = async (page = 1) => {
     setLoading(true);
@@ -137,9 +122,9 @@ function BlogRead() {
                       borderRadius="lg"
                       src={data.images[0].location}
                       alt={data.title}
-                      objectFit="cover"
+                      objectFit="contain"
                       width="100%"
-                      height="400px"
+                      height="500px"
                     />
                   </Box>
 
@@ -282,10 +267,6 @@ function BlogRead() {
                     </Circle>
                   </HStack>
                 </VStack>
-                <PopularPosts
-                  popular={popular}
-                  width={['100%', '100%', '30%', '30%']}
-                />
               </Stack>
             </Container>
             <LabCorner />

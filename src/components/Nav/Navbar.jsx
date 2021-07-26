@@ -108,6 +108,7 @@ function NavDrawer({ isOpen, onClose }) {
                             {products.map((p, i) => {
                               return (
                                 <ServiceLink
+                                  key={i}
                                   onClick={onClose}
                                   as={Link}
                                   _hover={{
@@ -138,6 +139,7 @@ function NavDrawer({ isOpen, onClose }) {
 
                 return (
                   <MenuItem
+                    key={l.pathname}
                     color="textDarkest.100"
                     py="5px"
                     width="100%"
@@ -256,7 +258,6 @@ const MenuLinks = ({ isOpen }) => {
                     fontWeight="500"
                     px="0"
                     transition="all 0.2s"
-                    borderRadius="md"
                     _hover={{ bg: 'gray.400' }}
                     _expanded={{ bg: 'blue.400' }}
                     width="100px"
@@ -268,6 +269,7 @@ const MenuLinks = ({ isOpen }) => {
                     {products.map((p, i) => {
                       return (
                         <MenuItem
+                          key={i}
                           color="black"
                           _hover={{
                             bg: 'gray.100',

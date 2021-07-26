@@ -45,14 +45,16 @@ export default function OurServices() {
               </Heading>
 
               <Text as="p" mt="4" className="afont">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa,
-                deleniti odio comm to help Nigerians looking to secure their
-                future with Agriculture.
+                We are here to give you a fulfilling experience in Agriculture
+                and Real Estate
               </Text>
               <Text as="p" mt="4" className="afont">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa,
-                deleniti odio comm to help Nigerians looking to secure their
-                future with Agriculture.
+                With a focus on quality food production and agricultural
+                education, we are determined to evolve and see to the
+                transformation of Agriculture in Africa. Our goal is to create a
+                more efficient agricultural system that largely contributes to
+                the development of A Better Nigeria, Africa and the world at
+                large.
               </Text>
             </Stack>
             <SimpleGrid spacing="8" columns={[1, 2, 2, 2]}>
@@ -74,13 +76,14 @@ export default function OurServices() {
                         letterSpacing="0"
                         lineHeight="1.33"
                         fontWeight="500"
+                        textTransform="uppercase"
                       >
-                        CASHEW REVIVAL PLAN
+                        Cashew farm set up and trade
                       </Heading>
 
                       <Text as="small" className="qfont" color="textDark.100">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Dolorem, deleniti.
+                        Setting up of cashew farms and aggregation of cashew
+                        from LBAs
                       </Text>
                     </Stack>
                   </Box>
@@ -104,13 +107,14 @@ export default function OurServices() {
                         letterSpacing="0"
                         lineHeight="1.33"
                         fontWeight="500"
+                        textTransform="uppercase"
                       >
-                        CATTLE RANCH
+                        Agricultural Institute
                       </Heading>
 
                       <Text as="small" className="qfont" color="textDark.100">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Dolorem, deleniti.
+                        Diffusion of agricultural knowledge and best practices
+                        in Africa
                       </Text>
                     </Stack>
                   </Box>
@@ -134,13 +138,14 @@ export default function OurServices() {
                         letterSpacing="0"
                         lineHeight="1.33"
                         fontWeight="500"
+                        textTransform="uppercase"
                       >
-                        FARMLANDS
+                        Farmland
                       </Heading>
 
                       <Text as="small" className="qfont" color="textDark.100">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Dolorem, deleniti.
+                        Sales and acquisition of problem free farmlands in all
+                        Nigerian states
                       </Text>
                     </Stack>
                   </Box>
@@ -164,13 +169,14 @@ export default function OurServices() {
                         letterSpacing="0"
                         lineHeight="1.33"
                         fontWeight="500"
+                        textTransform="uppercase"
                       >
-                        AGRICULTURAL INSTITUTE
+                        Beef Processing
                       </Heading>
 
                       <Text as="small" className="qfont" color="textDark.100">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Dolorem, deleniti.
+                        Providing certified healthy beef produce within your
+                        reach
                       </Text>
                     </Stack>
                   </Box>

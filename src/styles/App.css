@@ -256,13 +256,6 @@ ul li {
   height: 40px !important;
 }
 
-.line-clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden !important;
-}
-
 .pagination {
   display: flex;
   padding-left: 0;

@@ -6,6 +6,7 @@ import {
   Image,
   Text,
   Container,
+  SimpleGrid,
 } from '@chakra-ui/react';
 import bloghead from '../../assets/bloghead.jpg';
 import { stateToHTML } from 'draft-js-export-html';
@@ -43,12 +44,14 @@ const AuthorCategory = props => {
 const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
   return (
     <Container maxW="container.xl" px={8} pb="4">
-      <Box
+      <SimpleGrid
+        columns={[1, 1, 2]}
+        spacing={['40px', '40px', '60px']}
         pt={10}
-        display="flex"
-        flexDirection={{ base: 'column', md: 'row' }}
-        justifyContent="space-between"
-        alignItems="flex-start"
+        // display="flex"
+        // flexDirection={{ base: 'column', md: 'row' }}
+        // justifyContent="space-between"
+        // alignItems="flex-start"
       >
         <Box
           display="flex"
@@ -58,26 +61,19 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
           position="relative"
           alignItems="center"
           w="100%"
+          as={Link}
+          to={`/blog/${latestPost.category.category}/${latestPost.uuid}`}
         >
-          <Box width={{ base: '100%', sm: '100%' }} h="300px">
-            <PostLink
-              h="300px"
-              as={Link}
-              to={`/blog/${latestPost.category.category}/${latestPost.uuid}`}
-              textDecoration="none"
-              _hover={{ textDecoration: 'none' }}
-            >
-              <Image
-                margin="auto"
-                borderRadius="lg"
-                src={latestPost.images[0].location || bloghead}
-                alt={latestPost.title}
-                objectFit={'cover'}
-                width="100%"
-                height="100%"
-              />
-            </PostLink>
-          </Box>
+          <Image
+            margin="auto"
+            borderRadius="lg"
+            src={latestPost.images[0].location || bloghead}
+            alt={latestPost.title}
+            objectFit={'contain'}
+            // width="100%"
+            maxW="100%"
+            height="100%"
+          />
         </Box>
 
         <Box
@@ -110,11 +106,11 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
           </Heading>
 
           <Box
-            display={['block', 'block', 'none', 'block']}
+            display={['block', 'block', 'block', 'block']}
             id="conntent-box"
             color="textDark.100"
             py={'15px'}
-            height="100px"
+            height="150px"
             className="line-clamp"
           >
             <Box
@@ -125,7 +121,7 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
           </Box>
 
           <PostLink
-            display={['block', 'block', 'none', 'block']}
+            display={['block', 'block', 'block', 'block']}
             py="2"
             as={Link}
             textDecoration="none"
@@ -138,7 +134,7 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
             Read more
           </PostLink>
         </Box>
-      </Box>
+      </SimpleGrid>
     </Container>
   );
 };

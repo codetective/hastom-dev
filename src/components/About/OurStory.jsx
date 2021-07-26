@@ -24,7 +24,7 @@ export default function OurStory() {
             fontSize="14px"
             p={0}
           >
-            Our Journey
+            Our Story
           </Text>
           <Heading className="qfont">
             We are farmers with a mission and a grand vision.
@@ -91,9 +91,9 @@ export default function OurStory() {
         >
           <Heading className="qfont">Mission</Heading>
           <Text color={'gray.500'} fontSize={'md'} as="p">
-            To facilitate the development of agriculture in Africa through; real
-            estate, quality agricultural - education, agro-tourism and food
-            production.
+            Mission - To facilitate the development of agriculture in Africa
+            through; real estate, quality agricultural - education, agro-tourism
+            and food production.
           </Text>
         </Stack>
         <Stack
@@ -117,8 +117,8 @@ export default function OurStory() {
         >
           <Heading className="qfont">Vision</Heading>
           <Text color={'gray.500'} fontSize={'md'} as="p">
-            To be a catalyst in unlocking Africa’s Agricultural full potential
-            to become the global leader in food production.
+            Vision - To be a catalyst in unlocking Africa’s Agricultural full
+            potential to become the global leader in food production.
           </Text>
         </Stack>
       </SimpleGrid>

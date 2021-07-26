@@ -31,27 +31,22 @@ function FeatureCard({ post, loadingCategoryPosts }) {
         zIndex="2"
         rounded="0"
         mb={4}
+        as={Link}
+        to={`/blog/${post.category.category}/${post.uuid}`}
       >
-        <PostLink
-          as={Link}
-          to={`/blog/${post.category.category}/${post.uuid}`}
-          textDecoration="none"
-          _hover={{ textDecoration: 'none' }}
-        >
-          <Image
-            borderTopRightRadius="10px"
-            borderTopLeftRadius="10px"
-            margin="auto"
-            src={post.images[0].location}
-            alt={post.title}
-            objectFit="cover"
-            width="100%"
-            height="100%"
-          />
-        </PostLink>
+        <Image
+          borderTopRightRadius="10px"
+          borderTopLeftRadius="10px"
+          margin="auto"
+          src={post.images[0].location}
+          alt={post.title}
+          objectFit="contain"
+          width="100%"
+          // height="100%"
+        />
       </Box>
 
-      <Stack>
+      <Stack pt="5">
         <Flex justify="space-between" pr={6}>
           <AuthorCategory category={post.category} author={post.author} />
           <Text as={'p'} className="qfont" fontSize="12px" color="textDark.100">

@@ -2,10 +2,9 @@ import Logo from '../Nav/Logo';
 import React from 'react';
 import {
   FaFacebookF,
-  FaTwitter,
   FaInstagram,
-  FaLinkedinIn,
   FaPhoneAlt,
+  FaYoutube,
 } from 'react-icons/fa';
 import { MdLocationOn } from 'react-icons/md';
 import { Link } from 'react-router-dom';
@@ -30,31 +29,12 @@ const links1 = [
     route: '/about',
   },
   {
-    page: 'Farms',
-    route: '/farms',
+    page: 'Services',
+    route: '/services',
   },
   {
-    page: 'Lab Corner',
-    route: '/lab-corner',
-  },
-];
-const links2 = [
-  {
-    page: 'Invest',
-    route: '/invest',
-  },
-
-  {
-    page: 'Careers',
-    route: '/careers',
-  },
-  {
-    page: 'Support',
-    route: '/support',
-  },
-  {
-    page: 'Policies',
-    route: '/policies',
+    page: 'Blog',
+    route: '/blog',
   },
 ];
 
@@ -71,12 +51,12 @@ function Footer() {
           <Stack spacing="20px" width="100%">
             <Logo />
             <Text color="textDark.100">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa,
-              deleniti odio comm
+              Hastom - unlocking Africa’s Agricultural full potential
             </Text>
             <HStack spacing="20px">
               <Box
-                as="span"
+                as="a"
+                href="https://web.facebook.com/hastomnigeria/"
                 border="1px solid #339900"
                 transition="all .3s ease"
                 _hover={{
@@ -94,27 +74,10 @@ function Footer() {
               >
                 <FaFacebookF />
               </Box>
+
               <Box
-                as="span"
-                border="1px solid #339900"
-                transition="all .3s ease"
-                _hover={{
-                  bg: 'secondary.100',
-                  color: 'primary.100',
-                  transform: 'scale(1.3)',
-                }}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                color="secondary.100"
-                width="30px"
-                height="30px"
-                borderRadius="50%"
-              >
-                <FaLinkedinIn />
-              </Box>
-              <Box
-                as="span"
+                as="a"
+                href="https://www.instagram.com/hastomnigeria/"
                 border="1px solid #339900"
                 transition="all .3s ease"
                 _hover={{
@@ -133,7 +96,8 @@ function Footer() {
                 <FaInstagram />
               </Box>
               <Box
-                as="span"
+                as="a"
+                href="https://www.youtube.com/channel/UCUBf8cW3e01bNn6cmsQGRgg"
                 border="1px solid #339900"
                 transition="all .3s ease"
                 _hover={{
@@ -149,7 +113,7 @@ function Footer() {
                 height="30px"
                 borderRadius="50%"
               >
-                <FaTwitter />
+                <FaYoutube />
               </Box>
             </HStack>
           </Stack>
@@ -163,15 +127,6 @@ function Footer() {
           >
             <VStack spacing="15px">
               {links1.map((l, i) => {
-                return (
-                  <Link to={l.route} key={i}>
-                    <Text color="textDark.100">{l.page}</Text>
-                  </Link>
-                );
-              })}
-            </VStack>
-            <VStack spacing="15px">
-              {links2.map((l, i) => {
                 return (
                   <Link to={l.route} key={i}>
                     <Text color="textDark.100">{l.page}</Text>
@@ -206,7 +161,12 @@ function Footer() {
                 </Text>
               </Flex>
               <Text color="textDark.100" as="p">
-                08149423902, +234098737799
+                <a href="tel:+2348163013001">(+234) 8163013001</a>
+              </Text>
+              <Text color="textDark.100" as="p">
+                <a href="mailto:hello@hastomnigeria.com">
+                  hello@hastomnigeria.com
+                </a>
               </Text>
             </Box>
           </Stack>

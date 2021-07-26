@@ -125,9 +125,9 @@ function About() {
               pl={6}
               className="green-bar-before"
             >
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-              diamnonumy eirmod tempor invidunt ut labore et dolore diam nonumy
-              eirmod tempor invidunt ut labore et dolore
+              We are on a journey to create a more efficient agricultural system
+              that largely contributes to unlocking Africa’s full Agricultural
+              potential.
             </Text>
             <Stack py={4} spacing="20px">
               <Flex alignItems="center">

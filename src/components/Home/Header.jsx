@@ -89,8 +89,8 @@ function Header() {
             </Heading>
 
             <Text as="p" mb={10} color={['#fdfdfdcc', 'textDark.100']}>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore
+              Your Journey Towards a Fulfilling Agriculture & Real Estate
+              Experience.
             </Text>
 
             <Button

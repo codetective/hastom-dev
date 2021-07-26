@@ -71,21 +71,23 @@ function AboutPage() {
             We have a great mission: <br />
           </Text>
           <Text as="span" className="qfont" color="primary.100">
-            Food Sufficiency!
+            Facilitating the development of agriculture in Africa
           </Text>
         </Heading>
         <Container maxW="container.lg" pb="5">
           <Text as="p">
-            Hastom is a leading agricultural real estate, crop and livestock
-            farm company focused on orienting, facilitating the development of
-            agriculture in Nigeria. Experienced in cultivation and trade of
-            cashew as well as rearing of cattle, we offer agro-consulting
-            services aimed at setting up profitable agribusinesses that promote
-            rural development. With a focus on quality food production and
-            agricultural education, we are determined to evolve and see to the
-            transformation of Agriculture in Africa. Our goal is to create a
-            more efficient agricultural system that largely contributes to the
-            development of A Better Nigeria, Africa and the world at large.
+            Hastom is a purpose-led agricultural and real estate company focused
+            on orienting, facilitating the development of agriculture in Africa.
+            Experienced in cultivation and trade of cashew as well as rearing of
+            cattle, we offer agro-consulting services aimed at setting up
+            profitable agribusinesses that promote rural development.
+          </Text>
+          <Text as="p">
+            With a focus on quality food production and agricultural education,
+            we are determined to evolve and see to the transformation of
+            Agriculture in Africa. Our goal is to create a more efficient
+            agricultural system that largely contributes to the development of A
+            Better Nigeria, Africa and the world at large.
           </Text>
         </Container>
 
@@ -147,28 +149,28 @@ function AboutPage() {
             <SimpleGrid spacing="30px" columns={[1, 2, 3, 5]}>
               <StaffCard
                 src={ceo}
-                heading={'Ceo Name Here'}
+                heading={'Mr Debo Thomas'}
                 text={'CEO, Hastom Farms'}
               />
               <StaffCard
                 src={trade}
-                heading={'Staff Name Here'}
-                text={'Media Publicity'}
+                heading={'Enoch Adeniyi '}
+                text={'Media Manager'}
               />
               <StaffCard
                 src={marketer}
-                heading={'MD Name Here'}
-                text={'Technical Advisor'}
+                heading={'Oluwatobiloba Onisemo '}
+                text={'Head of Operations'}
               />
               <StaffCard
                 src={trade}
-                heading={'Staff Name Here'}
-                text={'Finance Manager'}
+                heading={'Tunde Ogunmuyiwa'}
+                text={'Livestock Farm Manager'}
               />
               <StaffCard
                 src={marketer}
-                heading={'MD Name Here'}
-                text={'MD, Hastom Farms'}
+                heading={'Moses Adeoye '}
+                text={'Crop Farm Manager'}
               />
             </SimpleGrid>
           </Stack>

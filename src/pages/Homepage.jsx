@@ -6,7 +6,6 @@ import FAQ from '../components/Home/Faq';
 import Features from '../components/Home/Features';
 import Header from '../components/Home/Header';
 import LabCorner from '../components/Home/LabCorner';
-import ManagerTalk from '../components/Home/ManagerTalk';
 
 function Homepage() {
   useEffect(() => {
@@ -17,7 +16,6 @@ function Homepage() {
       <Header />
       <About />
       <OurServices />
-      <ManagerTalk />
       <Features />
       <FAQ />
       <LabCorner />

@@ -39,7 +39,7 @@ function LabCorner() {
                 color="#e1e1e1"
               >
                 <Box as="span" class="span">
-                  Lab Corner's Latest Articles{' '}
+                  Latest Blog Articles{' '}
                 </Box>
               </Heading>
               <Text
