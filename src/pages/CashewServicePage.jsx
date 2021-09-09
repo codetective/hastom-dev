@@ -1,16 +1,16 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 
-import RanchDesc from '../components/Services/RanchDesc';
-import UnitPriceBar from '../components/Services/UnitPriceBar';
-import Resources from '../components/Services/Resources';
-import BottomCTA from '../components/Services/BottomCTA';
+import RanchDesc from '../components/MAIN/Services/RanchDesc';
+import UnitPriceBar from '../components/MAIN/Services/UnitPriceBar';
+import Resources from '../components/MAIN/Services/Resources';
+import BottomCTA from '../components/MAIN/Services/BottomCTA';
 import tablet from '../assets/howItWorks/tablet.png';
 import atm from '../assets/howItWorks/atm.png';
 import debitCard from '../assets/howItWorks/debit-card.png';
 import stats from '../assets/howItWorks/stats.png';
 
-import HowItWorks from '../components/Services/HowItWorks';
+import HowItWorks from '../components/MAIN/Services/HowItWorks';
 const product = {
   image: 'cashew',
   title: 'Cashew revival plan',

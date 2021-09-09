@@ -1,8 +1,3 @@
-import tablet from '../assets/howItWorks/tablet.png';
-import atm from '../assets/howItWorks/atm.png';
-import debitCard from '../assets/howItWorks/debit-card.png';
-import stats from '../assets/howItWorks/stats.png';
-
 const products = [
   {
     path: '/cashew-farm',

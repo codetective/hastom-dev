@@ -1,11 +1,11 @@
 import { Fade } from '@chakra-ui/transition';
 import { useEffect } from 'react';
-import OurServices from '../components/About/OurServices';
-import About from '../components/Home/About';
-import FAQ from '../components/Home/Faq';
-import Features from '../components/Home/Features';
-import Header from '../components/Home/Header';
-import LabCorner from '../components/Home/LabCorner';
+import OurServices from '../components/MAIN/About/OurServices';
+import About from '../components/MAIN/Home/About';
+import FAQ from '../components/MAIN/Home/Faq';
+import Features from '../components/MAIN/Home/Features';
+import Header from '../components/MAIN/Home/Header';
+import LabCorner from '../components/MAIN/Home/LabCorner';
 
 function Homepage() {
   useEffect(() => {

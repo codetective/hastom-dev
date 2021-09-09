@@ -2,10 +2,10 @@ import { Flex, Stack, Image, Box, HStack } from '@chakra-ui/react';
 import { FaInstagram, FaFacebook, FaYoutube } from 'react-icons/fa';
 import { Route, Switch } from 'react-router-dom';
 import loginScreen from '../assets/loginScreen.jpg';
-import LoginForm from '../components/Auth/LoginForm';
-import RegisterForm from '../components/Auth/RegisterForm';
+import LoginForm from '../components/MAIN/Auth/LoginForm';
+import RegisterForm from '../components/MAIN/Auth/RegisterForm';
 
-import Logo from '../components/Nav/Logo';
+import Logo from '../components/MAIN/Nav/Logo';
 import gleaf from '../assets/header/g-leaf.png';
 import yleaf from '../assets/header/y-leaf.png';
 

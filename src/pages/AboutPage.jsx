@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-import Logo from '../components/Nav/Logo';
+import Logo from '../components/MAIN/Nav/Logo';
 import farm from '../assets/about/farm.jpg';
 // import seeds from '../assets/about/seeds.jpg';
 // import planting from '../assets/about/planting.jpg';
@@ -20,9 +20,9 @@ import farm from '../assets/about/farm.jpg';
 import ceo from '../assets/about/ceo.jpg';
 import marketer from '../assets/about/marketer.jpg';
 import trade from '../assets/about/trade.jfif';
-import OurStory from '../components/About/OurStory';
-import StaffCard from '../components/About/StaffCard';
-import OurServices from '../components/About/OurServices';
+import OurStory from '../components/MAIN/About/OurStory';
+import StaffCard from '../components/MAIN/About/StaffCard';
+import OurServices from '../components/MAIN/About/OurServices';
 
 function AboutPage() {
   return (

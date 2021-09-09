@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import FeaturedCards from '../components/Blog/FeaturedCards';
-import LatestArticle from '../components/Blog/LatestArticle';
+import FeaturedCards from '../components/MAIN/Blog/FeaturedCards';
+import LatestArticle from '../components/MAIN/Blog/LatestArticle';
 
 import { Fade } from '@chakra-ui/transition';
 import baseURL from '../helpers/config';
 import axios from 'axios';
-import SkeletonLoaderBlog from '../components/Blog/SkeletonLoaderBlog';
+import SkeletonLoaderBlog from '../components/MAIN/Blog/SkeletonLoaderBlog';
 import { Center, Text } from '@chakra-ui/react';
 import Pagination from 'react-js-pagination';
-import ErrorAlert from '../components/Global/ErrorAlert';
+import ErrorAlert from '../components/MAIN/Global/ErrorAlert';
 
 function BlogListingByCategory() {
   let { category } = useParams();

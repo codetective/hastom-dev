@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@chakra-ui/react';
 
-import RanchDesc from '../components/Services/RanchDesc';
-import UnitPriceBar from '../components/Services/UnitPriceBar';
-import Resources from '../components/Services/Resources';
-import BottomCTA from '../components/Services/BottomCTA';
+import RanchDesc from '../components/MAIN/Services/RanchDesc';
+import UnitPriceBar from '../components/MAIN/Services/UnitPriceBar';
+import Resources from '../components/MAIN/Services/Resources';
+import BottomCTA from '../components/MAIN/Services/BottomCTA';
 import { Route, Switch, useLocation } from 'react-router-dom';
 
 import products from '../helpers/products';
-import HowItWorks from '../components/Services/HowItWorks';
+import HowItWorks from '../components/MAIN/Services/HowItWorks';
 
 function ServicesPage() {
   const { pathname } = useLocation();

@@ -13,9 +13,8 @@ import React, { useEffect, useState } from 'react';
 import {
   AuthorCategory,
   convertContentFromJSONToHTML,
-} from '../components/Blog/LatestArticle';
-import LabCorner from '../components/Home/LabCorner';
-import { PopularPosts } from '../components/Blog/FeaturedPosts';
+} from '../components/MAIN/Blog/LatestArticle';
+import LabCorner from '../components/MAIN/Home/LabCorner';
 
 import { IoIosShareAlt } from 'react-icons/io';
 import { FaCheck, FaCopy } from 'react-icons/fa';
@@ -27,11 +26,10 @@ import linkedin from '../assets/social_icons/linkedin.png';
 import { useParams } from 'react-router-dom';
 import baseURL from '../helpers/config';
 import axios from 'axios';
-import SkeletonLoaderBlog from '../components/Blog/SkeletonLoaderBlog';
-import ErrorAlert from '../components/Global/ErrorAlert';
+import SkeletonLoaderBlog from '../components/MAIN/Blog/SkeletonLoaderBlog';
+import ErrorAlert from '../components/MAIN/Global/ErrorAlert';
 import { useClipboard } from '@chakra-ui/react';
 import HelmetForSEO from '../helpers/HelmetForSEO';
-import { useGenCtx } from '../context/GeneralContext';
 
 function BlogRead() {
   let { article } = useParams();
@@ -39,7 +37,6 @@ function BlogRead() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   const { hasCopied, onCopy } = useClipboard(window.location);
-  const { articles } = useGenCtx();
 
   const FetchArticle = async (page = 1) => {
     setLoading(true);

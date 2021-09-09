@@ -9,12 +9,12 @@ import {
   TabPanel,
 } from '@chakra-ui/react';
 
-import RanchDesc from '../components/Services/RanchDesc';
-import UnitPriceBar from '../components/Services/UnitPriceBar';
+import RanchDesc from '../components/MAIN/Services/RanchDesc';
+import UnitPriceBar from '../components/MAIN/Services/UnitPriceBar';
 
-import BottomCTA from '../components/Services/BottomCTA';
-import SellFarmForm from '../components/Services/SellFarmForm';
-import BuyFarmForm from '../components/Services/BuyFarmForm';
+import BottomCTA from '../components/MAIN/Services/BottomCTA';
+import SellFarmForm from '../components/MAIN/Services/SellFarmForm';
+import BuyFarmForm from '../components/MAIN/Services/BuyFarmForm';
 
 const product = {
   title: 'Buy or Sell farmlands',

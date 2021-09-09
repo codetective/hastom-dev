@@ -1,12 +1,11 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 
-import RanchDesc from '../components/Services/RanchDesc';
-import UnitPriceBar from '../components/Services/UnitPriceBar';
-import Resources from '../components/Services/Resources';
+import RanchDesc from '../components/MAIN/Services/RanchDesc';
+import UnitPriceBar from '../components/MAIN/Services/UnitPriceBar';
+import Resources from '../components/MAIN/Services/Resources';
 
-import HowItWorks from '../components/Services/HowItWorks';
-import NewsLetterSignupRequest from '../components/Services/NewsLetterSignupRequest';
+import NewsLetterSignupRequest from '../components/MAIN/Services/NewsLetterSignupRequest';
 
 const product = {
   title: 'Beef processing',
