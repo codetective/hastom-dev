@@ -10,13 +10,61 @@ import {
   Icon,
   Text,
 } from '@chakra-ui/react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoMdLock } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { login } from '../../../apiServices/authServices';
+
 export default function LoginForm() {
+
+  const history = useHistory()
+
+    const initialValues = {
+      email: "",
+      password: ""
+    }
+
+    const validationSchema = Yup.object({
+      email: Yup.string().email("Invalid Email Format").required("Email is required"),
+      password: Yup.string().required("Password is required"),
+    })
+
+    const onSubmit = async(value) => {
+      // const cookieData = await cookie()
+      try{
+        const res = await login(value)
+        if(res.status === 200){
+          localStorage.setItem("token", res.data.token)
+          history.push("/dashboard")
+        }
+      }
+      catch(err){
+        console.log(err)
+      }
+      // console.log(cookieData)
+    }
+
   return (
     <Stack spacing={4} w={'80%'} maxW={'md'} height="100%" justify="center">
-      <form>
+      <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+      >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        isSubmitting,
+        handleBlur,
+        handleSubmit,
+        
+        /* and other goodies */
+      }) => (
+      <form onSubmit={handleSubmit}>
         <Stack spacing="25px">
           <Heading
             className="qfont"
@@ -51,6 +99,10 @@ export default function LoginForm() {
                 pl="45px"
                 rounded="full"
                 bg="white"
+                name="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
               />
             </InputGroup>
           </FormControl>
@@ -72,6 +124,10 @@ export default function LoginForm() {
                 pl="45px"
                 rounded="full"
                 bg="white"
+                name="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
               />
             </InputGroup>
           </FormControl>
@@ -102,6 +158,8 @@ export default function LoginForm() {
           </Text>
         </Stack>
       </form>
+      )}
+      </Formik>
     </Stack>
   );
 }
