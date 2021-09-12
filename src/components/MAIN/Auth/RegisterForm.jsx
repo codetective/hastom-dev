@@ -18,11 +18,18 @@ import { IoMdLock } from 'react-icons/io';
 import { MdContacts, MdLocationOn } from 'react-icons/md';
 import { Link, useHistory } from 'react-router-dom';
 import { register } from '../../../apiServices/authServices';
+import {useState} from '@hookstate/core';
+import store from '../../../store/store';
+import {Spinner} from 'react-bootstrap'
 
 
 export default function RegisterForm() {
 
     const history = useHistory()
+
+    const {alertNotification} = useState(store)
+    const {alertType} = useState(store)
+    const {alertMessage} = useState(store)
 
     const initialValues = {
       name: "",
@@ -45,11 +52,37 @@ export default function RegisterForm() {
         const res = await register(value)
         if(res.status === 200){
           localStorage.setItem("token", res.data.token)
+          alertMessage.set("Registeration Successful")
+          alertType.set("success")
+          alertNotification.set(true)
+          setTimeout(() => {
+            alertNotification.set(false)
+            alertMessage.set("")
+            alertType.set("")
+          }, 1000);
           history.push("/dashboard")
+        }
+        else{
+          alertMessage.set("Registeration Failed")
+          alertType.set("danger")
+          alertNotification.set(true)
+          setTimeout(() => {
+            alertNotification.set(false)
+            alertMessage.set("")
+            alertType.set("")
+          }, 1000);
         }
       }
       catch(err){
         console.log(err)
+        alertMessage.set(err.message)
+          alertType.set("success")
+          alertNotification.set(true)
+          setTimeout(() => {
+            alertNotification.set(false)
+            alertMessage.set("")
+            alertType.set("")
+          }, 1000);
       }
       // console.log(cookieData)
     }
@@ -280,7 +313,11 @@ export default function RegisterForm() {
             }}
             type="submit"
           >
-            Sign Up
+            {isSubmitting ?
+            <Spinner animation="border"/>
+            :
+            "Sign Up"
+            }
           </Button>
 
           {/* helper text */}

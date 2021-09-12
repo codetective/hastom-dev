@@ -7,18 +7,45 @@ import {
   SimpleGrid,
   Flex,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, {useEffect} from 'react';
 import FarmsAndAccountsManagerBoxes from './FarmsAndAccountsManagerBoxes';
 import StatsPanel from './StatsPanel';
 import src from '../../../assets/blog/farmers2.jpg';
+import {useState} from '@hookstate/core';
+import store from '../../../store/store';
+import {profile} from '../../../apiServices/userServices';
+import ContentLoader from '../../../helpers/ContentLoader';
+
+
 
 export default function DashboardOverview() {
+  const [pageLoad, setPageLoad] = React.useState(true)
+  const {user} = useState(store)
+
+  useEffect(() => {
+    const fetch = async() => {
+      try{
+        const res = await profile()
+        user.set(res.data.user)
+        setPageLoad(false)
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
+    fetch()
+  }
+  , [])
+
   return (
     <>
+      {pageLoad ?
+        <ContentLoader />
+        :
       <Stack py="40px">
         <Container maxW="container.xl" px={8}>
           <Text>
-            Hello <b>Debo!</b>
+            Hello <b>{user.get().name}!</b>
           </Text>
         </Container>
         <StatsPanel />
@@ -81,6 +108,7 @@ export default function DashboardOverview() {
           </Container>
         </Box>
       </Stack>
+      }
     </>
   );
 }

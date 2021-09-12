@@ -8,12 +8,23 @@ import GeneralProvider from './context/GeneralContext';
 import Main from './shells/Main';
 import ScrollToTop from './helpers/ScrollToTop';
 import Dashboard from './shells/Dashboard';
+import {Alert} from 'react-bootstrap';
+import {useState} from '@hookstate/core';
+import store from './store/store';
 
 function App() {
+
+  const {alertNotification} = useState(store)
+  const {alertType} = useState(store)
+  const {alertMessage} = useState(store)
+
   return (
     <ChakraProvider theme={customTheme}>
       <GeneralProvider>
         <ScrollToTop>
+        <Alert show={alertNotification.get()} variant={alertType.get()}>
+          {alertMessage.get()}
+        </Alert>
           <Switch>
             <Route
               exact
