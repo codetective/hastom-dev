@@ -14,8 +14,8 @@ import { convertFromRaw } from 'draft-js';
 import { Link } from 'react-router-dom';
 
 function convertContentFromJSONToHTML(text) {
-  let blocks = JSON.parse(text);
-  return stateToHTML(convertFromRaw(blocks));
+  // let blocks = JSON.parse(text);
+  return stateToHTML(convertFromRaw(text));
 }
 
 const AuthorCategory = props => {

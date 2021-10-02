@@ -43,6 +43,7 @@ export default function LoginForm() {
       try{
         const res = await login(value)
         if(res.status === 200){
+          console.log(res)
           localStorage.setItem("token", res.data.token)
           alertMessage.set("Login Successful")
           alertType.set("success")
