@@ -35,7 +35,12 @@ export default function Dashboard() {
             <MyFarms />
           </Suspense>
         </Route>
-
+        <Route exact path="/dashboard/support">
+          <Suspense fallback={<FallBackComponent />}>
+            <iframe width="100%" className="min-vdh-100 iff" allowfullscreen="true" frameBorder="0" scrolling="0" src='https://hastom.tawk.help/' />
+            {/*<MyFarms />*/}
+          </Suspense>
+        </Route>
         <Route path="*">Coming Soon</Route>
       </Switch>
     </DashBoardShell>

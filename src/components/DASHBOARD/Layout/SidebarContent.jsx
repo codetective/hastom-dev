@@ -28,8 +28,8 @@ const LinkItems = [
 const SidebarContent = ({ shrinkSidebar, shrink, onClose, ...rest }) => {
   return (
     <Box
-      transition="1s ease"
-      bg="#00a651"
+      transition="0.5s ease"
+      bg="#00a621"
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={shrink ? { base: 'full', md: 20 } : { base: 'full', md: 60 }}
@@ -51,7 +51,7 @@ const SidebarContent = ({ shrinkSidebar, shrink, onClose, ...rest }) => {
             boxShadow: 'none',
           }}
         />
-        <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
+        <CloseButton className="bg-white fw-bold" display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       <Box pt="40px">
         {LinkItems.map(link => (

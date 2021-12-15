@@ -32,7 +32,7 @@ export default function DashBoardShell({ children }) {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} shrink={shrink} />
       <Box
-        transition="margin 1s ease"
+        transition="margin 0.5s ease"
         ml={shrink ? { base: 0, md: 20 } : { base: 0, md: 60 }}
       >
         {children}

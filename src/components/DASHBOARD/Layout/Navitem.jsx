@@ -21,7 +21,8 @@ const NavItem = ({ shrink, path, icon, children, ...rest }) => {
         align="center"
         py="4"
         px="8"
-        fontWeight="600"
+        my="3"
+        fontWeight="500"
         role="group"
         cursor="pointer"
         _hover={{
@@ -33,7 +34,7 @@ const NavItem = ({ shrink, path, icon, children, ...rest }) => {
         {icon && (
           <Icon
             mr="4"
-            fontSize="16"
+            fontSize="24"
             _groupHover={{
               color: 'primary.100',
             }}

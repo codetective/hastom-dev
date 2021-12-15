@@ -175,7 +175,7 @@ export default function RegisterForm() {
           </FormControl>
 
           {/* phone number */}
-          {/* <FormControl id="phone">
+          <FormControl id="phone">
             <InputGroup>
               <InputLeftElement
                 pl="2"
@@ -191,9 +191,12 @@ export default function RegisterForm() {
                 pl="45px"
                 rounded="full"
                 bg="white"
+                name="phone_number"
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </InputGroup>
-          </FormControl> */}
+          </FormControl>
 
           {/* <HStack> */}
             {/* state */}

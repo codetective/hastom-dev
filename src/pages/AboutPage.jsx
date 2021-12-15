@@ -146,7 +146,7 @@ function AboutPage() {
               <Text as="span">The Amazing People Who Run Hastom</Text>
             </Heading>
 
-            <SimpleGrid spacing="30px" columns={[1, 2, 3, 5]}>
+            <SimpleGrid className="mt-5" spacing="30px" columns={[1, 2, 3, 5]}>
               <StaffCard
                 src={ceo}
                 heading={'Mr Debo Thomas'}

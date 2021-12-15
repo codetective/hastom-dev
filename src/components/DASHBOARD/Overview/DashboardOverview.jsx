@@ -5,6 +5,7 @@ import {
   Text,
   Button,
   SimpleGrid,
+  HStack,
   Flex,
 } from '@chakra-ui/react';
 import React, {useEffect} from 'react';
@@ -14,20 +15,23 @@ import src from '../../../assets/blog/farmers2.jpg';
 import {useState} from '@hookstate/core';
 import store from '../../../store/store';
 import {profile} from '../../../apiServices/userServices';
+import {logout} from '../../../apiServices/authServices';
 import ContentLoader from '../../../helpers/ContentLoader';
 
 
 
 export default function DashboardOverview() {
   const [pageLoad, setPageLoad] = React.useState(true)
+  const [Out, setOut] = React.useState(true)
   const {user} = useState(store)
 
   useEffect(() => {
     const fetch = async() => {
       try{
         const res = await profile()
-        user.set(res.data.user)
+        user.set(res.data)
         setPageLoad(false)
+        console.log(user)
       }
       catch(err){
         console.log(err)
@@ -37,37 +41,42 @@ export default function DashboardOverview() {
   }
   , [])
 
+
   return (
     <>
       {pageLoad ?
         <ContentLoader />
         :
-      <Stack py="40px">
+      <Stack py="30px">
         <Container maxW="container.xl" px={8}>
-          <Text>
-            Hello <b>{user.get().name}!</b>
-          </Text>
+          <h1 className="fs-5 mb-4">
+            WELCOME <b className="text-uppercase">{user.data.get().name}</b>
+          </h1>
         </Container>
-        <StatsPanel />
+
+        <StatsPanel user={user} />
+
         <Box py="30px">
           <Container maxW="container.xl" px={8}>
             <Stack
-              spacing="20px"
-              direction={['column', 'column', 'column', 'row']}
+              spacing="25px"
+              direction={['column', 'column', 'row', 'row']}
             >
-              <FarmsAndAccountsManagerBoxes />
-              <Box w={['100%', '100%', '100%', '40%']}>
-                <SimpleGrid
+              <FarmsAndAccountsManagerBoxes user={user} />
+
+
+              <Box w={['100%', '100%' , '45%','35%']}>
+                <Stack
                   backgroundImage={src}
                   bgRepeat="no-repeat"
                   bgPos="center"
-                  bgColor="rgba(0,0,0,0.5)"
+                  bgColor="rgba(0,0,0,0.65)"
                   bgBlendMode="darken"
                   columns="2"
                   w="100%"
                   px="5"
                   py="7"
-                  rounded="lg"
+                  rounded="sm"
                   shadow="lg"
                   border="1px solid"
                   borderColor="gray.50"
@@ -82,7 +91,6 @@ export default function DashboardOverview() {
                     fontWeight="semi-bold"
                   >
                     Buy/Sell
-                    <br />
                     Farmlands
                   </Flex>
                   <Stack color="white">
@@ -93,17 +101,20 @@ export default function DashboardOverview() {
                     </Text>
                     <Button
                       color="white"
-                      className="afont"
+                      className="afont mt-4"
+                      w="50%"
                       bg="secondary.100"
-                      rounded="lg"
-                      size="xs"
+                      rounded="sm"
+                      width="auto"
                       colorScheme="orange"
                     >
                       More
                     </Button>
                   </Stack>
-                </SimpleGrid>
+                </Stack>
               </Box>
+
+
             </Stack>
           </Container>
         </Box>
