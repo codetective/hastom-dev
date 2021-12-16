@@ -3,9 +3,9 @@ import { useBreakpointValue } from '@chakra-ui/react';
 
 export default function PseudoTableHead() {
   const variant = useBreakpointValue({
-    lg: (
+    md: (
       <SimpleGrid
-        columns={6}
+        columns={4}
         className="afont"
         px="4"
         py="2"
@@ -26,16 +26,6 @@ export default function PseudoTableHead() {
         <Box px="3">
           <Text fontWeight="bold" color="textDarker.100">
             Actvity
-          </Text>
-        </Box>
-        <Box px="3">
-          <Text fontWeight="bold" color="textDarker.100">
-            Cost
-          </Text>
-        </Box>
-        <Box px="3">
-          <Text fontWeight="bold" color="textDarker.100">
-            Priority
           </Text>
         </Box>
         <Box px="3">

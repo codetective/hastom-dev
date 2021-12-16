@@ -9,21 +9,25 @@ import {
   Button,
   Text,
 } from '@chakra-ui/react';
-import { FaIndustry } from 'react-icons/fa';
-import { AiFillAppstore } from 'react-icons/ai';
+import {FaDownload, FaFilePdf, FaTractor} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import nuts from '../../../assets/header/nuts.jpg';
 import cows from '../../../assets/header/cows.jpg';
 import useQuery from '../../../helpers/useQuery';
-import CashewFarmsListing from './Farms/CashewFarmsListing';
-import PackDetailsPage from './Farms/PackDetailsPage';
+import FarmsListing from './Farms/FarmsListing';
+import {GiFallingLeaf} from "react-icons/all";
+import {getFarmType} from '../../../apiServices/farmTypeServices';
+import React, {useEffect} from 'react';
+import ContentLoader from '../../../helpers/ContentLoader';
+import {AiFillAppstore} from "react-icons/ai";
+
 
 function PageTitle() {
   return (
     <Stack spacing="20px">
-      <Stack direction={['row', 'row', 'column']} spacing="20px">
+      <HStack direction={['row', 'row', 'column']} spacing="20px">
         <Box as="span" color="gray.400" fontSize="35px">
-          <FaIndustry />
+          <GiFallingLeaf />
         </Box>
         <Text
           color="gray.400"
@@ -34,98 +38,89 @@ function PageTitle() {
         >
           My Farms
         </Text>
-      </Stack>
-      <Text as="small">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auctor
-        vestibulum porta. Sed sed interdum erat. Curabitur sem dui, auctor eget
-        tincidunt sed, porta vel tortor.
-      </Text>
+      </HStack>
     </Stack>
   );
 }
 
-function FarmDetailBox({ name, capital, units, pack, id, image }) {
+function FarmDetailBox({ name, status, id, image, short_description }) {
   return (
     <Stack spacing="20px" shadow="lg" bg="white" justifyContent="space-between">
-      <Box height="150px" pos="relative">
-        <Image src={image} w="100%" h="100%" objectFit="cover" />
-        {units === 0 && (
-          <Badge
-            ml={5}
-            position="relative"
-            top="-15px"
-            rounded="full"
-            color="white"
-            bg="secondary.100"
-            size="sm"
-            py="1"
-            pl="15px"
-            pr="30px"
-            textAlign="left"
-          >
-            Coming Soon
-          </Badge>
-        )}
+      <Box height="200px" pos="relative">
+        <Image src={image} w="100%" h="100%" objectFit="cover"
+               alt='Farm Type'
+               fallbackSrc='https://via.placeholder.com/150' />
+          {status !== 0 && (
+              <Badge
+                  ml={5}
+                  position="relative"
+                  top="-15px"
+                  rounded="full"
+                  color="white"
+                  bg="primary.100"
+                  size="sm"
+                  py="1"
+                  pl="15px"
+                  pr="30px"
+                  textAlign="left"
+              >
+                  Opened
+              </Badge>
+          )}
+          {status === 0 && (
+              <Badge
+                  ml={5}
+                  position="relative"
+                  top="-15px"
+                  rounded="full"
+                  color="white"
+                  bg="secondary.100"
+                  size="sm"
+                  py="1"
+                  pl="15px"
+                  pr="30px"
+                  textAlign="left"
+              >
+                  Closed
+              </Badge>
+          )}
+
       </Box>
       <Stack spacing="10px" px="5">
-        <Text
-          color="textDarker.100"
-          as="h1"
-          fontSize={['24px', '23px']}
-          fontWeight="bold"
-          className="afont"
-          textTransform="capitalize"
-        >
-          {name}
-        </Text>
+          <HStack>
+              <FaTractor color="green" fontSize="24"/>
+              <Text
+                  color="textDarker.100"
+                  as="h1"
+                  fontSize={['24px', '23px']}
+                  fontWeight="bold"
+                  className="afont"
+                  textTransform="capitalize"
+              >
+                  {name}
+              </Text>
+          </HStack>
 
-        {units !== 0 && (
+          <Text as="small">
+              {short_description}
+          </Text>
+
           <>
-            {' '}
-            <Text as="small" color="gray.500" textTransform="uppercase">
-              capital
-            </Text>
-            <Text
-              color="textDarker.100"
-              as="h1"
-              fontSize={['24px', '23px']}
-              fontWeight="bold"
-              className="qfont"
-              textTransform="capitalize"
-            >
-              {'$' + capital}
-            </Text>
             <HStack justifyContent="space-between" className="qfont">
-              <HStack spacing="10px">
-                <Box as="span" color="green" fontSize="20px">
-                  <AiFillAppstore />
-                </Box>
-                <Text color="textDarkest.100" fontWeight="bold" as="small">
-                  Total units : {units}
-                </Text>
-              </HStack>
               <Text
                 textTransform="uppercase"
                 color="secondary.100"
                 fontWeight="bold"
                 as="small"
               >
-                {pack} packs
+               Farms
               </Text>
             </HStack>
           </>
-        )}
-        {units === 0 && (
-          <Text as="small">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-            auctor vestibulum porta. Sed sed interdum erat. Curabitur sem dui,
-            auctor eget tincidunt sed, porta vel tortor. Sed sed interdum erat.
-            Curabitur sem dui, auctor eget tincidunt sed, porta vel tortor.
-          </Text>
-        )}
+
       </Stack>
       <Box>
-        <Link to={'/dashboard/my-farms?product=' + id}>
+        <Link to={'/dashboard/my-farms?farmtype=' + id}>
           <Button
             w="full"
             rounded="0"
@@ -136,7 +131,8 @@ function FarmDetailBox({ name, capital, units, pack, id, image }) {
             }}
             color="white"
           >
-            {units === 0 ? 'Book a Spot' : 'View farms'}
+            {/*{status === 0 ? 'Book a Spot' : 'View farms'}*/}
+              View Farms
           </Button>
         </Link>
       </Box>
@@ -145,17 +141,37 @@ function FarmDetailBox({ name, capital, units, pack, id, image }) {
 }
 
 export default function MyPage() {
-  const product = useQuery().get('product');
+  const farmtype = useQuery().get('farmtype');
   const pack = useQuery().get('pack');
 
+
+    const [farmTypes, setFarmTypes] = React.useState([])
+    const [isLoading, setIsLoading] = React.useState(true)
+    const [contentChanged, setContentChanged] = React.useState(0)
+
+    useEffect(() => {
+        const fetch = async() => {
+            try{
+                const res = await getFarmType()
+                setFarmTypes(res.data.data)
+                setIsLoading(false)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        fetch()
+    }, [contentChanged])
+
+
+
   return (
+      isLoading ?
+          <ContentLoader />
+          :
     <>
-      {product === 'cashew-farms' ? (
-        <CashewFarmsListing />
-      ) : product === 'ranch-pack' ? (
-        'ranch'
-      ) : pack ? (
-        <PackDetailsPage />
+      {farmtype ? (
+        <FarmsListing />
       ) : (
         <Box>
           <Stack
@@ -164,24 +180,17 @@ export default function MyPage() {
             h={['fit-content', 'fit-content', '40vh', '40vh']}
           >
             <Container maxW="container.xl" px={8}>
-              <SimpleGrid columns={[1, 1, 2, 3]} spacing="30px" mb="50">
                 <PageTitle />
-                <FarmDetailBox
-                  name={'Cashew Farms'}
-                  units={24}
-                  capital="5900"
-                  pack={3}
-                  id={'cashew-farms'}
-                  image={nuts}
-                />
-                <FarmDetailBox
-                  name={'Ranching pack'}
-                  units={0}
-                  capital={0}
-                  pack={0}
-                  id={'ranch-pack'}
-                  image={cows}
-                />
+              <SimpleGrid columns={[1, 1, 2, 3]} spacing="30px" mt="17" mb="50">
+                  {farmTypes.map(data => (
+                      <FarmDetailBox
+                          name={data.name}
+                          status={data.status}
+                          id={data.name}
+                          short_description={data.short_description}
+                          image={'https://farmlandnigeria.com/storage/' + data.image}
+                      />
+                  ))}
               </SimpleGrid>
             </Container>
           </Stack>

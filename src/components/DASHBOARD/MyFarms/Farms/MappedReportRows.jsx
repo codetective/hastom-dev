@@ -7,7 +7,7 @@ export default function MappedReportsRows({ report, onOpen, setReportToview }) {
     <Fade in>
       <SimpleGrid
         w="100%"
-        columns={[1, 1, 1, 6]}
+        columns={[1, 1, 4,4]}
         className="qfont"
         px="4"
         spacing="10px"
@@ -19,35 +19,35 @@ export default function MappedReportsRows({ report, onOpen, setReportToview }) {
           <Text
             fontWeight="bold"
             className="afont"
-            display={['initial', 'inital', 'initial', 'none']}
+            display={['initial', 'inital', 'none', 'none']}
             textTransform="uppercase"
             as="small"
           >
             date :
           </Text>
           <Text fontSize="15px" color="textDarker.100">
-            {report.date}
+            {report.id}
           </Text>
         </HStack>
         <HStack spacing="10px" justifyContent="space-between">
           <Text
             fontWeight="bold"
             className="afont"
-            display={['initial', 'inital', 'initial', 'none']}
+            display={['initial', 'inital', 'none', 'none']}
             textTransform="uppercase"
             as="small"
           >
             report :
           </Text>
           <Text wordBreak="break-word" fontSize="15px" color="textDarker.100">
-            {report.report}
+            {report.id}
           </Text>
         </HStack>
         <HStack justifyContent="space-between" alignItems="flex-start">
           <Text
             fontWeight="bold"
             className="afont"
-            display={['initial', 'inital', 'initial', 'none']}
+            display={['initial', 'inital', 'none', 'none']}
             textTransform="uppercase"
             as="small"
           >
@@ -60,59 +60,21 @@ export default function MappedReportsRows({ report, onOpen, setReportToview }) {
             color="textDarker.100"
             overflowY="hidden"
           >
-            {report.activity.slice(0, 20) + ' ...'}
+            {report.id.slice(0, 25) + ' ...'}
           </Text>
         </HStack>
-        <HStack spacing="10px" justifyContent="space-between">
+        <HStack justifyContent="space-between" alignItems="flex-start">
           <Text
             fontWeight="bold"
             className="afont"
-            display={['initial', 'inital', 'initial', 'none']}
-            textTransform="uppercase"
-            as="small"
-          >
-            cost :
-          </Text>
-          <Text wordBreak="break-all" fontSize="15px" color="textDarker.100">
-            {report.cost}
-          </Text>
-        </HStack>
-        <HStack spacing="10px" justifyContent="space-between">
-          <Text
-            fontWeight="bold"
-            className="afont"
-            display={['initial', 'inital', 'initial', 'none']}
-            textTransform="uppercase"
-            as="small"
-          >
-            priority :
-          </Text>
-          <Text
-            wordBreak="break-all"
-            fontSize="15px"
-            color={
-              report.priority === 'High'
-                ? 'red.500'
-                : report.priority === 'Low'
-                ? 'yellow'
-                : 'primary.100'
-            }
-          >
-            {report.priority}
-          </Text>
-        </HStack>
-        <HStack justifyContent="space-between" alignItems="flex-end">
-          <Text
-            fontWeight="bold"
-            className="afont"
-            display={['initial', 'inital', 'initial', 'none']}
+            display={['initial', 'inital', 'none', 'none']}
             textTransform="uppercase"
             as="small"
           >
             Media link :
           </Text>
           <HStack w={['fit-content', '100%']} justifyContent="flex-end">
-            <Link t={report.media_link}>
+            <Link t={report.id}>
               <Text textDecoration="underline" fontSize="15px" color="blue">
                 media
               </Text>
@@ -134,6 +96,7 @@ export default function MappedReportsRows({ report, onOpen, setReportToview }) {
             </Button>
           </HStack>
         </HStack>
+
       </SimpleGrid>
     </Fade>
   );
