@@ -24,7 +24,7 @@ import {
 import React, {useEffect} from 'react';
 import {AiFillAppstore, AiFillCalendar,} from 'react-icons/ai';
 import cashew from '../../../../assets/header/nuts.jpg';
-import {FaCalendarAlt, FaLeaf, FaTractor, FaTree} from "react-icons/fa";
+import {FaCalendarAlt, FaLeaf, FaStamp, FaStop, FaTractor, FaTree, FaWallet} from "react-icons/fa";
 import ContentLoader from "../../../../helpers/ContentLoader";
 import {getAllUserPacks } from '../../../../apiServices/packServices';
 import {getFarm } from '../../../../apiServices/farmServices';
@@ -98,13 +98,65 @@ export default function FarmInvestment() {
                   <HStack as={"small"} ><AiFillAppstore color={"green"}/> <b>Unit avialable: </b><span>{data.max}</span></HStack>
                   <Text>{data.description}</Text>
                   <Divider />
-                  <b>Investment Window</b>
-                  <HStack>
-                    <FaCalendarAlt/>
-                    <span>{data.cycle.start_date}</span>
-                    <span>----</span>
-                    <span>{data.cycle.start_date}</span>
-                  </HStack>
+                  { new Date(data.cycle.end_date).toLocaleDateString([],
+                      {
+                        year: "numeric",
+                        month: "numeric",
+                        day: "numeric",
+                      }
+                  ) >= new Date().toLocaleDateString([],
+                      {
+                        year: "numeric",
+                        month: "numeric",
+                        day: "numeric",
+                      }
+                  )
+                  && (
+                      <Stack
+                          p="3"
+                          bg="gray.50"
+                          border="1px solid #f1f1f1"
+                          rounded="2"
+                          mb={"====================="}
+                      >
+                        <HStack><FaWallet color="green"/> <b>Investment Window Opened</b></HStack>
+                        <HStack>
+                          <FaCalendarAlt/>
+                          <span>{data.cycle.start_date}</span>
+                          <span>----</span>
+                          <b>{data.cycle.end_date}</b>
+                        </HStack>
+                      </Stack>
+                  )}
+
+                  { new Date(data.cycle.end_date).toLocaleDateString([],
+                      {
+                        year: "numeric",
+                        month: "numeric",
+                        day: "numeric",
+                      }
+                  ) <= new Date().toLocaleDateString([],
+                      {
+                        year: "numeric",
+                        month: "numeric",
+                        day: "numeric",
+                      }
+                  )
+                  && (
+                      <>
+                        <HStack><FaStop color="red"/> <Text color="red">Investment Window Closed</Text></HStack>
+                        <HStack>
+                          <FaCalendarAlt/>
+                          <span>{data.cycle.start_date}</span>
+                          <span>----</span>
+                          <b>{data.cycle.end_date}</b>
+                        </HStack>
+                      </>
+
+                  )}
+
+
+
 
 
                   <Button
