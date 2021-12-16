@@ -9,10 +9,10 @@ import {
   Button,
   Text,
 } from '@chakra-ui/react';
-import {FaDownload, FaFilePdf, FaTractor} from 'react-icons/fa';
+import {FaDownload, FaFilePdf, FaMoneyBillAlt, FaTractor} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import useQuery from '../../../helpers/useQuery';
-import FarmsListing from './Farms/FarmsListing';
+import FarmInvestment from './Farms/FarmInvestment';
 import {GiFallingLeaf} from "react-icons/all";
 import {getFarmType} from '../../../apiServices/farmTypeServices';
 import React, {useEffect} from 'react';
@@ -24,7 +24,7 @@ function PageTitle() {
     <Stack spacing="20px">
       <HStack direction={['row', 'row', 'column']} spacing="20px">
         <Box as="span" color="gray.400" fontSize="35px">
-          <GiFallingLeaf />
+          <FaMoneyBillAlt />
         </Box>
         <Text
           color="gray.400"
@@ -33,7 +33,7 @@ function PageTitle() {
           fontWeight="bold"
           className="afont"
         >
-          My Farms
+          Farm Investments Available
         </Text>
       </HStack>
     </Stack>
@@ -47,6 +47,42 @@ function FarmDetailBox({ name, status, id, image, short_description }) {
         <Image src={image} w="100%" h="100%" objectFit="cover"
                alt='Farm Type'
                fallbackSrc='https://via.placeholder.com/150' />
+          {status !== 0 && (
+              <Badge
+                  ml={5}
+                  position="relative"
+                  top="-15px"
+                  rounded="full"
+                  color="white"
+                  bg="primary.100"
+                  size="sm"
+                  py="1"
+                  pl="15px"
+                  pr="30px"
+                  textAlign="left"
+              >
+                  Opened
+              </Badge>
+          )}
+          {status === 0 && (
+              <Badge
+                  ml={5}
+                  position="relative"
+                  top="-55px"
+                  shadow={"lg"}
+                  rounded="full"
+                  color="red"
+                  bg="red.50"
+                  size="sm"
+                  py="6"
+                  px={"3"}
+                  textTransform={"capitalize"}
+                  textAlign="left"
+              >
+                  Closed
+              </Badge>
+          )}
+
       </Box>
       <Stack spacing="10px" px="5">
           <HStack>
@@ -67,37 +103,42 @@ function FarmDetailBox({ name, status, id, image, short_description }) {
               {short_description}
           </Text>
 
-          <>
-            <HStack justifyContent="space-between" className="qfont">
-              <Text
-                textTransform="uppercase"
-                color="secondary.100"
-                fontWeight="bold"
-                as="small"
-              >
-               Farms
-              </Text>
-            </HStack>
-          </>
+          {status === 0 && (
+              <Box py={"5"}>
+                      <Badge
+                          w="full"
+                          rounded="0"
+                          className="afont"
+                          p={"3"}
+                          variant='outline'
+                          colorScheme="red"
+                          textTransform={"capitalize"}
+                      >
+                          Farm is Currently Closed stay tuned for updates
+                      </Badge>
+              </Box>
+          )}
+          {status !== 0 && (
+              <Box py={"5"}>
+                  <Link to={'/dashboard/investments?farmtype=' + id}>
+                      <HStack
+                          w="full"
+                          rounded="0"
+                          className="afont"
+                      >
+                        <Text color={"green"} as={"b"} textDecoration={"underline"}>
+                             View Avialable farms
+                        </Text>
+
+                      </HStack>
+                  </Link>
+              </Box>
+          )}
 
       </Stack>
-      <Box>
-        <Link to={'/dashboard/my-farms?farmtype=' + id}>
-          <Button
-            w="full"
-            rounded="0"
-            className="afont"
-            bg="primary.100"
-            _hover={{
-              bg: 'secondary.100',
-            }}
-            color="white"
-          >
-            {/*{status === 0 ? 'Book a Spot' : 'View farms'}*/}
-              View Farms
-          </Button>
-        </Link>
-      </Box>
+
+
+
     </Stack>
   );
 }
@@ -126,16 +167,13 @@ export default function MyPage() {
     }, [contentChanged])
 
 
-
-
-
   return (
       isLoading ?
           <ContentLoader />
           :
     <>
       {farmtype ? (
-        <FarmsListing />
+        <FarmInvestment />
       ) : (
         <Box>
           <Stack

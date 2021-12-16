@@ -25,10 +25,12 @@ import React, {useEffect} from 'react';
 import {AiFillAppstore, AiFillCalendar,} from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import cashew from '../../../../assets/header/nuts.jpg';
-import {FaCalendarAlt, FaDownload, FaFilePdf, FaLeaf, FaTractor} from "react-icons/fa";
+import {FaCalendarAlt, FaDownload, FaEraser, FaFilePdf, FaLeaf, FaTractor, FaTree} from "react-icons/fa";
 import ContentLoader from "../../../../helpers/ContentLoader";
 import {getAllUserPacks } from '../../../../apiServices/packServices';
 import PackDetailsPage from './PackDetailsPage';
+import useQuery from "../../../../helpers/useQuery";
+import {GiBonsaiTree, GiFarmTractor} from "react-icons/all";
 
 
 export default function FarmsListing() {
@@ -38,6 +40,9 @@ export default function FarmsListing() {
   const { isOpen: isReportOpen , onOpen: onReportOpen, onClose: onReportClose } = useDisclosure()
 
   const [viewReports, setViewReports] = React.useState({})
+
+  const farmtype = useQuery().get('farmtype');
+
 
   const viewData = (item) => {
     setViewReports(item)
@@ -73,7 +78,7 @@ export default function FarmsListing() {
           justifyContent="center"
       >
         <FaTractor color="green" fontSize="24"/>
-        <Text as="h2" color="green" maxW="container.xl">Cashew</Text>
+        <Text as="h2" color="green" maxW="container.xl">{farmtype.toUpperCase()}</Text>
       </HStack>
 
       <Box
@@ -91,6 +96,8 @@ export default function FarmsListing() {
         <SimpleGrid columns={[1, 1, 2, 3]} spacing="40px">
 
           {allPacks.map(item => (
+              <>
+              {item.item.type.name.toLowerCase() === farmtype.toLowerCase() && (
               <Stack
                   spacing="20px"
                   justifyContent="space-between"
@@ -99,7 +106,7 @@ export default function FarmsListing() {
                   pos="relative"
                   border="1px solid"
                   borderColor="#efefef"
-                  top={["-32%", "-32%", '-40%', '-30%']}
+                  top={["0%", "0%", '0%', '-20%']}
               >
                 <Stack minHeight="50px" bg="gray.50" pos="relative" py="4" px="5">
                   {item.status !== "active" && (
@@ -126,6 +133,7 @@ export default function FarmsListing() {
                     </Text>
                   </HStack>
                   <Divider color="primary.100" />
+
                   <HStack justifyContent="space-between" className="qfont">
                     <HStack spacing="10px">
                       <Box as="span" color="secondary.100" fontSize="20px">
@@ -133,13 +141,15 @@ export default function FarmsListing() {
                       </Box>
 
                       <HStack>
-                        <Text color="textDarkest.100" className="qfont">
+                        <Text textTransform="capitalize" color="textDarkest.100" className="qfont">
                           {item.item.label}
                         </Text>
 
                       </HStack>
                     </HStack>
                   </HStack>
+
+
                   <HStack justifyContent="space-between" className="afont">
                     <HStack spacing="10px">
                       <Box as="span" fontSize="20px">
@@ -255,7 +265,7 @@ export default function FarmsListing() {
 
                 <Modal isOpen={isReportOpen} onClose={onReportClose} size={"full"}>
                   <ModalOverlay />
-                  <ModalContent className="mt-0 rounded-0  p-0" backgroundColor="#fafafa">
+                  <ModalContent className="mt-0 rounded-0  p-0" backgroundColor="#fafafa" h="100vh" position="fixed" overflowY="auto">
                     <ModalCloseButton zIndex="1000" background="black" border="1px solid white" color="white" className="btn-cls" />
                     <ModalBody className="p-0">
                       <PackDetailsPage data={item} />
@@ -266,7 +276,46 @@ export default function FarmsListing() {
                 </Modal>
 
               </Stack>
+                )}
 
+              {item.item.type.name.toLowerCase() !== farmtype.toLowerCase() && (
+                  <>
+                    <Stack
+                        spacing="20px"
+                        justifyContent="center"
+                        p="5"
+                        pos="relative"
+                        top={["0%", "0%", '0%', '0%']}>
+                      <HStack>
+                        <FaTree color="green" fontSize="50"/>
+                        <GiFarmTractor color="green" fontSize="50"/>
+                      </HStack>
+
+                      <h2>
+                        You have no Farms Here
+                      </h2>
+                    </Stack>
+                    <Stack
+                        spacing="20px"
+                        justifyContent="space-between"
+                        shadow="lg"
+                        bg="white"
+                        p="5"
+                        pos="relative"
+                        border="1px solid"
+                        borderColor="#efefef"
+                        top={["0%", "0%", '0%', '-20%']}>
+                      <Text as="h3" lineHeight="1.7">
+                        you have no Farms Here Start Investing Today Learn more about this Farm and its packages or book a session with a customer service representative
+                      </Text>
+                      <div className="btn btn-primary">Book a Session</div>
+                    </Stack>
+                  </>
+
+              )}
+
+
+              </>
           ))}
 
         </SimpleGrid>

@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import DashBoardShell from '../components/DASHBOARD/Layout';
 
 const MyFarms = lazy(() => import('../components/DASHBOARD/MyFarms/MyFarms'));
+const AllInvestment = lazy(() => import('../components/DASHBOARD/Investment/Investment'));
 
 const DashboardOverview = lazy(() =>
   import('../components/DASHBOARD/Overview/DashboardOverview')
@@ -33,6 +34,11 @@ export default function Dashboard() {
         <Route exact path="/dashboard/my-farms">
           <Suspense fallback={<FallBackComponent />}>
             <MyFarms />
+          </Suspense>
+        </Route>
+        <Route exact path="/dashboard/investments">
+          <Suspense fallback={<FallBackComponent />}>
+            <AllInvestment />
           </Suspense>
         </Route>
         <Route exact path="/dashboard/support">
