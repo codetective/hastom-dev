@@ -18,13 +18,13 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Icon,
+  Icon,useToast,
 } from '@chakra-ui/react';
-import { Modal, Spinner } from "react-bootstrap"
+import { Modal, Spinner, Alert } from "react-bootstrap"
 import React, {useEffect} from 'react';
 import {AiFillAppstore, AiFillCalendar,} from 'react-icons/ai';
 import cashew from '../../../../assets/header/nuts.jpg';
-import {FaCalendarAlt, FaLeaf, FaStamp, FaStop, FaTractor, FaTree, FaWallet} from "react-icons/fa";
+import {FaCalendarAlt, FaFilePdf, FaLeaf, FaStamp, FaStop, FaTractor, FaTree, FaWallet} from "react-icons/fa";
 import ContentLoader from "../../../../helpers/ContentLoader";
 import {getAllUserPacks } from '../../../../apiServices/packServices';
 import {getFarm } from '../../../../apiServices/farmServices';
@@ -35,14 +35,77 @@ import * as Yup from 'yup';
 import {useState} from '@hookstate/core';
 import store from '../../../../store/store';
 import {createOrderPack} from '../../../../apiServices/packServices';
+import {Link} from "react-router-dom";
 
 
-export default function FarmInvestment() {
+function FarmDetailBox({ name, status, id, image, short_description,long_description }) {
+  return (
+      <Stack alignItems={"center"} spacing="25px" pb={"3"} w={"100%"}  justifyContent="center">
+        <Box height="100px" w={"100%"}  pos="relative">
+          <Image src={image} w="100%" h="100%" objectFit="cover"
+                 alt='Farm Type'
+                 fallbackSrc='https://via.placeholder.com/150' />
+        </Box>
+        <Container  maxW={"container.xl"} px="8">
+          <HStack >
+            {status !== 0 && (
+                <Badge
+                    mb={"4"}
+                    position="relative"
+                    rounded="full"
+                    color="white"
+                    bg="primary.100"
+                    size="sm"
+                    py="1"
+                    pl="15px"
+                    pr="15px"
+                    textAlign="center"
+                >
+                  Opened
+                </Badge>
+            )}
+          </HStack>
+          <HStack pb={"4"}>
+            <FaTractor color="green" fontSize="24"/>
+            <Text
+                color="textDarker.100"
+                as="h1"
+                fontSize={['24px', '23px']}
+                fontWeight="bold"
+                className="afont"
+                textTransform="capitalize"
+            >
+              {name}
+            </Text>
+          </HStack>
+
+
+          <Text as="" fontWeight={"500"} color={"black"} mb={"3"} w={"100%"}>
+            {short_description}
+          </Text>
+          <Text as="">
+            {long_description}
+          </Text>
+
+
+
+
+        </Container>
+
+
+
+      </Stack>
+  );
+}
+
+export default function FarmInvestment({farmTypes}) {
   const [allInvestment, setAllInvestment] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
   const [contentChanged, setContentChanged] = React.useState(0)
   const [farmID, setFarmId] = React.useState("")
+  const [farmQTY, setFarmQTY] = React.useState("")
   const [openModal, setOpenModal] = React.useState(false)
+  const toast = useToast();
 
 
   const [viewInvest, setViewInvest] = React.useState({})
@@ -66,8 +129,9 @@ export default function FarmInvestment() {
     fetch()
   }, [contentChanged])
 
-  const startInvesting = (id) => {
+  const startInvesting = (id,QTY) => {
     setFarmId(id)
+    setFarmQTY(QTY)
     handleShow()
   }
 
@@ -76,8 +140,8 @@ export default function FarmInvestment() {
     const {alertMessage} = useState(store)
 
     const initialValues = {
-      quantity: 0,
-      item_id: farmID
+      quantity: "0",
+      item_id: "14"
     }
 
     const validationSchema = Yup.object({
@@ -88,38 +152,41 @@ export default function FarmInvestment() {
       try{
         const res = await createOrderPack(value)
         if(res.status === 200){
-          alertMessage.set("Order Successful")
-          alertType.set("success")
-          alertNotification.set(true)
-          setTimeout(() => {
-            alertNotification.set(false)
-            alertMessage.set("")
-            alertType.set("")
-          }, 1000);
+          return toast({
+            title: 'Congrats.',
+            description: 'Farm Order is being processed',
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+            padding:"900"
+          });
         }
         else{
-          alertMessage.set("Order Failed")
-          alertType.set("danger")
-          alertNotification.set(true)
-          setTimeout(() => {
-            alertNotification.set(false)
-            alertMessage.set("")
-            alertType.set("")
-          }, 1000);
+          return toast({
+            title: 'oops something went wrong.',
+            description: 'Check your internet ',
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+            padding:"900"
+          });
         }
       }
       catch(err){
         console.log(err)
-        alertMessage.set(err.message)
-          alertType.set("danger")
-          alertNotification.set(true)
-          setTimeout(() => {
-            alertNotification.set(false)
-            alertMessage.set("")
-            alertType.set("")
-          }, 1000);
+        return toast({
+          title: 'error',
+          description: err.message,
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          padding:"900"
+        });
       }
     }
+
+
+
   return (
       isLoading ?
           <ContentLoader />
@@ -127,10 +194,13 @@ export default function FarmInvestment() {
     <Stack pb="40px"  justifyContent="center" alignItems= "center">
 
       <Modal show={openModal} onHide={handleClose} size="md">
-        <Modal.Header closeButton className="invest-modal-header">
-          <Modal.Title className="invest-modal-text">Invest</Modal.Title>
+        <Modal.Header>
+          <Modal.Title>How many units do you want to Farm? </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <Alert show={alertNotification.get()} variant={alertType.get()}>
+            <p className="alert-p"> {alertMessage.get()} </p>
+          </Alert>
           <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
@@ -149,18 +219,24 @@ export default function FarmInvestment() {
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
+            <Text as={"small"}>You can only buy a maximum of <b>100</b> units to buy more units please kindly contact support</Text>
+            <Box border="solid 1px #f7f5f6" p={"3"} bg={"gray.50"} my={"2"}>
+              <Text as={"small"}><b>Note:</b> all investment above 10 million naira are performed offline. You can reach out to our Finiancial Administrator for clearance</Text>
+            </Box>
+            <HStack pt={"3"} as={"small"} ><AiFillAppstore color={"green"}/> <b>Unit avialable: </b><span>{farmQTY}</span></HStack>
             <Input
                   type="number"
                   placeholder="Order Quantity"
                   py="4"
-                  pl="45px"
-                  rounded="full"
+                  // pl="45px"
+                  rounded="sm"
                   bg="white"
                   name="quantity"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.quantity}
-                  className='mt-3 mb-3'
+                  className='mt-2'
+                  max={"100"}
                 />
                 <Button
                   size="md"
@@ -185,22 +261,59 @@ export default function FarmInvestment() {
       </Formik>
         </Modal.Body>
       </Modal>
-      <HStack
-          px={8}  pt="5" pb="3"
-          background="white"
-          bg="#F7FAFC"
-          w="100%"
-          borderTop="1px solid"
-          borderColor="secondary.100"
-          justifyContent="center"
-      >
-        <FaTractor color="green" fontSize="24"/>
-        <Text as="h2" color="green" maxW="container.xl">Invest In {farmtype} </Text>
+
+
+      <HStack w={"100%"}>
+      {farmTypes.map(data => (
+          <>
+          {data.name.toLowerCase() === farmtype.toLowerCase() && (
+              <Stack alignItems={"center"} w={"100%"} bg={"#f7f6f6"}>
+          <FarmDetailBox
+              name={data.name}
+              status={data.status}
+              id={data.name}
+              short_description={data.short_description}
+              long_description={data.long_description}
+              image={'https://farmlandnigeria.com/storage/' + data.image}
+          />
+                <Container maxW={"container.xl"} pb={"5"} px={"8"} textDecoration={"underline"}>
+                  <h3>View Agreement and Brochure</h3>
+                  <Box width={["100%" ,"90%", "50%", "35%"]} pt={"5"}>
+                    {
+                      data.documents.length >= 0  ?
+                          data.documents.map((item) => (
+                              <a className="rounded-2 mb-2 me-2 col-auto d-flex align-items-center btn btn-dark text-white" >
+                                <FaFilePdf className="fs-2 text-white me-2 "/>
+                                <a  href={'https://farmlandnigeria.com/storage/' + item.path }>
+                                  {item.path}
+                                </a>
+                              </a>
+                          ))
+                          :
+                          <div>
+                            <h6 className="fw-bold fs-4">NO avialable Documents</h6>
+                            <p>all documents are being proccessed</p>
+                          </div>
+
+                    }
+                  </Box>
+                </Container>
+                </Stack>
+          )}
+          </>
+      ))}
       </HStack>
 
 
+
+
       <Container maxW="container.xl" px={8} >
-        <SimpleGrid columns={[1, 1, 3, 3]} spacing="40px">
+        <HStack>
+          <Text as={"b"} color={"green"} fontSize={"24"} py={"5"} textAlign={"left"} w={"100%"}>Available farms</Text>
+        </HStack>
+
+
+        <SimpleGrid columns={[1, 1, 2, 3]} spacing="40px">
           {/*{console.log(allInvestment)}*/}
           {allInvestment.map((data, index) => (
               <>
@@ -240,15 +353,21 @@ export default function FarmInvestment() {
                           bg="gray.50"
                           border="1px solid #f1f1f1"
                           rounded="2"
-                          mb={"====================="}
+                          spacing={"20px"}
                       >
-                        <HStack><FaWallet color="green"/> <b>Investment Window Opened</b></HStack>
-                        <HStack>
+                        <HStack><FaWallet color="green"/> <b>Investment Opened</b></HStack>
+                        <HStack flexWrap={"wrap"}>
                           <FaCalendarAlt/>
                           <span>{data.cycle.start_date}</span>
                           <span>----</span>
                           <b>{data.cycle.end_date}</b>
                         </HStack>
+                        <Button
+                            colorScheme={"green"}
+                            onClick={() => startInvesting(data.id, data.max)}
+                        >
+                          Start Investing
+                        </Button>
                       </Stack>
                   )}
 
@@ -278,18 +397,13 @@ export default function FarmInvestment() {
 
                   )}
 
-                  <Button
-                  colorScheme={"green"}
-                  onClick={() => startInvesting(data.id)}
-                  >
-                    Start Investing
-                  </Button>
+
+
+
                 </Stack>
               </Stack>
               )}
-              {data.type.name.toLowerCase() !== farmtype.toLowerCase() && (
-                  <h2>No farms Available here</h2>
-              )}
+
               </>
 
           ))}

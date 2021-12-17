@@ -7,3 +7,7 @@ export const createOrderPack = (data) => {
 export const getAllUserPacks = () => {
     return http.get("/order/get-order-pack-for-user")
 }
+
+export const getOrderById = (id) => {
+    return http.get(`/order/get-order-pack-by-item-id/${id}`)
+}

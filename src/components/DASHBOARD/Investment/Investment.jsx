@@ -107,14 +107,17 @@ function FarmDetailBox({ name, status, id, image, short_description }) {
               <Box py={"5"}>
                       <Badge
                           w="full"
+                          display={"flex"}
+                          flexWrap={"wrap"}
                           rounded="0"
                           className="afont"
                           p={"3"}
                           variant='outline'
                           colorScheme="red"
                           textTransform={"capitalize"}
+                          wordBreak={"break-word"}
                       >
-                          Farm is Currently Closed stay tuned for updates
+                          Farm is Currently Closed <br/>stay tuned for updates
                       </Badge>
               </Box>
           )}
@@ -173,7 +176,7 @@ export default function MyPage() {
           :
     <>
       {farmtype ? (
-        <FarmInvestment />
+        <FarmInvestment farmTypes={farmTypes} />
       ) : (
         <Box>
           <Stack

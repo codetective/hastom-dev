@@ -61,94 +61,97 @@ const Settings = () => {
       }
     }
     return (
-        <Container>
-            <Row>
-                <Col>
-                    <h2>Edit Profile</h2>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Formik
-                        initialValues={initialValues}
-                        onSubmit={onSubmit}
-                        validationSchema={validationSchema}
-                    >
-                    {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    isSubmitting,
-                    handleBlur,
-                    handleSubmit,
-                    
-                    /* and other goodies */
-                    }) => (
-                    <form onSubmit={handleSubmit}>
-                        <Input
-                            type="text"
-                            placeholder="Name"
-                            py="4"
-                            pl="45px"
-                            rounded="full"
-                            bg="white"
-                            name="name"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.name}
-                            className='mt-3 mb-3'
-                        />
-                        <Input
-                            type="text"
-                            placeholder="Address"
-                            py="4"
-                            pl="45px"
-                            rounded="full"
-                            bg="white"
-                            name="location"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.location}
-                            className='mt-3 mb-3'
-                        />
-                        <Input
-                            type="text"
-                            placeholder="Phone Number"
-                            py="4"
-                            pl="45px"
-                            rounded="full"
-                            bg="white"
-                            name="phone_number"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.phone_number}
-                            className='mt-3 mb-3'
-                        />
-                        <Button
-                            size="md"
-                            rounded="34px"
-                            type="submit"
-                            color="white"
-                            bg="primary.100"
-                            className='mt-3 mb-3'
-                            px={'40px'}
-                            _hover={{
-                                bg: ['secondary.100'],
-                            }}
+        <>
+            <Container className={"border rounded-2 shadow-sm p-4 container px-5 mt-4"} px={8}>
+                <Row>
+                    <Col>
+                        <b>Edit Profile</b>
+                    </Col>
+                </Row>
+                <Row mt={"5"}>
+                    <Col>
+                        <Formik
+                            initialValues={initialValues}
+                            onSubmit={onSubmit}
+                            validationSchema={validationSchema}
                         >
-                            {isSubmitting ?
-                            <Spinner animation="border"/>
-                            :
-                            "Submit"
-                            }
-                        </Button>
-                        </form>
-                        )}
-                    </Formik>
-                </Col>
-            </Row>
-        </Container>
+                            {({
+                                  values,
+                                  errors,
+                                  touched,
+                                  handleChange,
+                                  isSubmitting,
+                                  handleBlur,
+                                  handleSubmit,
+
+                                  /* and other goodies */
+                              }) => (
+                                <form onSubmit={handleSubmit}>
+                                    <Input
+                                        type="text"
+                                        placeholder="Name"
+                                        py="4"
+                                        pl="45px"
+                                        rounded="full"
+                                        bg="white"
+                                        name="name"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.name}
+                                        className='mt-3 mb-3'
+                                    />
+                                    <Input
+                                        type="text"
+                                        placeholder="Address"
+                                        py="4"
+                                        pl="45px"
+                                        rounded="full"
+                                        bg="white"
+                                        name="location"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.location}
+                                        className='mt-3 mb-3'
+                                    />
+                                    <Input
+                                        type="text"
+                                        placeholder="Phone Number"
+                                        py="4"
+                                        pl="45px"
+                                        rounded="full"
+                                        bg="white"
+                                        name="phone_number"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.phone_number}
+                                        className='mt-3 mb-3'
+                                    />
+                                    <Button
+                                        size="md"
+                                        rounded="34px"
+                                        type="submit"
+                                        color="white"
+                                        bg="primary.100"
+                                        className='mt-3 mb-3'
+                                        px={'40px'}
+                                        _hover={{
+                                            bg: ['secondary.100'],
+                                        }}
+                                    >
+                                        {isSubmitting ?
+                                            <Spinner animation="border"/>
+                                            :
+                                            "Submit"
+                                        }
+                                    </Button>
+                                </form>
+                            )}
+                        </Formik>
+                    </Col>
+                </Row>
+            </Container>
+        </>
+
     )
 }
 
