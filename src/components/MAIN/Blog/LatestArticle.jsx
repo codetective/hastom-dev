@@ -18,6 +18,8 @@ function convertContentFromJSONToHTML(text) {
   return stateToHTML(convertFromRaw(text));
 }
 
+
+
 const AuthorCategory = props => {
   return (
     <Box id="author-category" className="qfont" pl={6}>
@@ -115,7 +117,7 @@ const LatestArticle = ({ loadingCategoryPosts, latestPost }) => {
           >
             <Box
               dangerouslySetInnerHTML={{
-                __html: convertContentFromJSONToHTML(latestPost.content),
+                __html: JSON.parse(latestPost.content).blocks[0].text,
               }}
             />
           </Box>
