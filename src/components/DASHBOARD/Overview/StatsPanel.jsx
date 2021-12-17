@@ -35,8 +35,8 @@ export default function StatsPanel({user}) {
           <OverviewBox
             iconColor="secondary.100"
             icon={<FaChartBar />}
-            title="total farm costs"
-            value="$450.00"
+            title="total farm Investment"
+            value={user.data.get().active.length}
             index={2}
           />
 

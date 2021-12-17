@@ -10,18 +10,18 @@ import { FiHome, FiSettings, FiMenu, FiDatabase } from 'react-icons/fi';
 import NavItem from './Navitem';
 import { IoIosChatboxes } from 'react-icons/io';
 import { BsFillPieChartFill } from 'react-icons/bs';
-import { FaChartLine } from 'react-icons/fa';
+import {FaChartLine, FaInfo, FaInfoCircle, FaLeaf} from 'react-icons/fa';
 
 const LinkItems = [
   { name: 'Dashboard', icon: FiHome, path: '/dashboard' },
-  { name: 'My Farms', icon: FaChartLine, path: '/dashboard/my-farms' },
+  { name: 'My Farms', icon: FaLeaf, path: '/dashboard/my-farms' },
   {
     name: 'Investments',
-    icon: BsFillPieChartFill,
+    icon: FaChartLine,
     path: '/dashboard/investments',
   },
-  { name: 'Farmlands', icon: FiDatabase, path: '/dashboard/farmlands' },
-  { name: 'Support', icon: IoIosChatboxes, path: '/dashboard/support' },
+  // { name: 'Farmlands', icon: FiDatabase, path: '/dashboard/farmlands' },
+  { name: 'Support', icon: FaInfoCircle, path: '/dashboard/support' },
   { name: 'Account', icon: FiSettings, path: '/dashboard/account' },
 ];
 
