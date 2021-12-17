@@ -140,8 +140,8 @@ export default function FarmInvestment({farmTypes}) {
     const {alertMessage} = useState(store)
 
     const initialValues = {
-      quantity: "0",
-      item_id: "14"
+      quantity: "",
+      item_id: farmID
     }
 
     const validationSchema = Yup.object({
@@ -237,6 +237,8 @@ export default function FarmInvestment({farmTypes}) {
                   value={values.quantity}
                   className='mt-2'
                   max={"100"}
+                  min={"1"}
+                  required={"required"}
                 />
                 <Button
                   size="md"

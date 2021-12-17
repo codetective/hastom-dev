@@ -44,7 +44,7 @@ export default function PackDetailsTable({data}) {
       {/*<SortingHeadBar />*/}
       <PseudoTableHead />
           return (
-      {/*{data.map((data, i) => (*/}
+      {data.map((data, i) => (
           <Fade in>
             <SimpleGrid
                 w="100%"
@@ -150,7 +150,7 @@ export default function PackDetailsTable({data}) {
 
             </SimpleGrid>
           </Fade>
-      {/*))}*/}
+      ))}
           );
 
       {reportToView && (
