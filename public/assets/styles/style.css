@@ -9,3 +9,13 @@
     min-height:150vh !important;
     overflow: hidden !important;
 }
+.invest-modal-header{
+    background-color: green;
+}
+
+.invest-modal-text{
+    color: #FFFFFF;
+}
+body > div.fade.modal.show > div > div > div.invest-modal-header.modal-header > button{
+    color: #FFFFFF;
+}

@@ -11,6 +11,10 @@ const DashboardOverview = lazy(() =>
   import('../components/DASHBOARD/Overview/DashboardOverview')
 );
 
+const Settings = lazy(() =>
+  import('../components/DASHBOARD/Settings/Settings')
+);
+
 function FallBackComponent() {
   return (
     <Center flexDir="column">
@@ -45,6 +49,11 @@ export default function Dashboard() {
           <Suspense fallback={<FallBackComponent />}>
             <iframe width="100%" className="min-vdh-100 iff" allowfullscreen="true" frameBorder="0" scrolling="0" src='https://hastom.tawk.help/' />
             {/*<MyFarms />*/}
+          </Suspense>
+        </Route>
+        <Route exact path="/dashboard/account">
+          <Suspense fallback={<FallBackComponent />}>
+            <Settings />
           </Suspense>
         </Route>
         <Route path="*">Coming Soon</Route>

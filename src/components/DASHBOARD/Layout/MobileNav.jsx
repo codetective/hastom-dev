@@ -18,8 +18,61 @@ import {
 } from '@chakra-ui/react';
 import { FiMenu, FiBell } from 'react-icons/fi';
 import Logo from '../../MAIN/Nav/Logo';
+import {logout} from '../../../apiServices/authServices';
+import store from '../../../store/store';
+import { useState } from '@hookstate/core';
+import {useHistory} from 'react-router-dom';
+
 
 const MobileNav = ({ shrink, onOpen, ...rest }) => {
+  let history = useHistory()
+
+  const {isLoggedIn} = useState(store)
+  const {alertNotification} = useState(store)
+  const {alertType} = useState(store)
+  const {alertMessage} = useState(store)
+
+
+  const onLogout = async() => {
+    try{
+      const res = await logout()
+      if(res.status === 200){
+        localStorage.removeItem("token")
+        isLoggedIn.set(false)
+        alertMessage.set("Logout Successful")
+        alertType.set("success")
+        alertNotification.set(true)
+        setTimeout(() => {
+          alertNotification.set(false)
+          alertMessage.set("")
+          alertType.set("")
+        }, 1000);
+        history.push("/")
+      }
+      else{
+        alertMessage.set("Logout Failed")
+        alertType.set("danger")
+        alertNotification.set(true)
+        setTimeout(() => {
+          alertNotification.set(false)
+          alertMessage.set("")
+          alertType.set("")
+        }, 1000);
+      }
+    }
+    catch(err){
+      console.log(err)
+      alertMessage.set(err.message)
+        alertType.set("danger")
+        alertNotification.set(true)
+        setTimeout(() => {
+          alertNotification.set(false)
+          alertMessage.set("")
+          alertType.set("")
+        }, 1000);
+    }
+  }
+
   return (
     <Box
       transition="margin 1s ease"
@@ -72,7 +125,7 @@ const MobileNav = ({ shrink, onOpen, ...rest }) => {
                     borderColor={useColorModeValue('gray.200', 'gray.700')}
                     display={{ base: 'flex', md: 'none' }}
                   >
-                    <MenuItem>Sign out</MenuItem>
+                    <MenuItem onClick={onLogout}>Sign out</MenuItem>
                   </MenuList>
                 </Menu>
                 <VStack
@@ -87,6 +140,7 @@ const MobileNav = ({ shrink, onOpen, ...rest }) => {
                     variant="flushed"
                     fontSize="xs"
                     color="gray.600"
+                    onClick={onLogout}
                   >
                     Log Out
                   </Button>

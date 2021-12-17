@@ -15,7 +15,6 @@ import src from '../../../assets/blog/farmers2.jpg';
 import {useState} from '@hookstate/core';
 import store from '../../../store/store';
 import {profile} from '../../../apiServices/userServices';
-import {logout} from '../../../apiServices/authServices';
 import ContentLoader from '../../../helpers/ContentLoader';
 
 
