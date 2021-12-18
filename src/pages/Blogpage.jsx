@@ -25,11 +25,7 @@ function Blogpage() {
     <Fade in>
       <TopNav />
       <Switch>
-      <Route path="/blog/:category/:article" children={<BlogRead />} />
-      <Route
-          path="/blog/:category"
-          children={<BlogListingByCategory />}
-        />
+      
         <Route path="/blog">
           <>
             {loadingArticles && <SkeletonLoaderBlog />}
