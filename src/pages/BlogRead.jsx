@@ -11,8 +11,7 @@ import {
 } from '@chakra-ui/layout';
 import React, { useEffect, useState } from 'react';
 import {
-  AuthorCategory,
-  convertContentFromJSONToHTML,
+  AuthorCategory
 } from '../components/MAIN/Blog/LatestArticle';
 import LabCorner from '../components/MAIN/Home/LabCorner';
 
@@ -30,15 +29,18 @@ import SkeletonLoaderBlog from '../components/MAIN/Blog/SkeletonLoaderBlog';
 import ErrorAlert from '../components/MAIN/Global/ErrorAlert';
 import { useClipboard } from '@chakra-ui/react';
 import HelmetForSEO from '../helpers/HelmetForSEO';
+import {getBlogByID} from '../apiServices/blogService';
 
 function BlogRead() {
   let { article } = useParams();
+  console.log(article)
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   const { hasCopied, onCopy } = useClipboard(window.location);
 
-  const FetchArticle = async (page = 1) => {
+  
+  const fetchArticle = async () => {
     setLoading(true);
     setError(null);
     try {
@@ -60,7 +62,7 @@ function BlogRead() {
   };
 
   useEffect(() => {
-    FetchArticle();
+    fetchArticle();
     //eslint-disable-next-line
   }, [article]);
 
@@ -82,7 +84,8 @@ function BlogRead() {
             title={data.title}
             image={data.image}
             description={
-              convertContentFromJSONToHTML(data.content).slice(3, 60) + '...'
+              // convertContentFromJSONToHTML(data.content).slice(3, 60) + '...'
+              JSON.parse(data.content).blocks[0].text
             }
           />
           <Box bg="white">
@@ -136,7 +139,9 @@ function BlogRead() {
                   <Box
                     className="blog-content-box"
                     dangerouslySetInnerHTML={{
-                      __html: convertContentFromJSONToHTML(data.content),
+                      // __html: convertContentFromJSONToHTML(data.content),
+                      __html: JSON.parse(data.content).blocks[0].text,
+                      
                     }}
                   />
                   {/* end of article body */}

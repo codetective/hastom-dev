@@ -25,7 +25,12 @@ function Blogpage() {
     <Fade in>
       <TopNav />
       <Switch>
-        <Route exact path="/blog">
+      <Route path="/blog/:category/:article" children={<BlogRead />} />
+      <Route
+          path="/blog/:category"
+          children={<BlogListingByCategory />}
+        />
+        <Route path="/blog">
           <>
             {loadingArticles && <SkeletonLoaderBlog />}
             {!loadingArticles && errorArticles && (
@@ -94,12 +99,6 @@ function Blogpage() {
             </Center>
           </>
         </Route>
-        <Route
-          exact
-          path="/blog/:category"
-          children={<BlogListingByCategory />}
-        />
-        <Route path="/blog/:category/:article" children={<BlogRead />} />
       </Switch>
     </Fade>
   );

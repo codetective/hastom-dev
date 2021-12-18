@@ -13,6 +13,7 @@ import { Center, Text } from '@chakra-ui/react';
 import Pagination from 'react-js-pagination';
 import ErrorAlert from '../components/MAIN/Global/ErrorAlert';
 
+
 function BlogListingByCategory() {
   let { category } = useParams();
   const [loadingCategoryPosts, setLoadingCategoryPosts] = useState(false);

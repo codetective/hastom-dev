@@ -11,7 +11,7 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 
-import { AuthorCategory, convertContentFromJSONToHTML } from './LatestArticle';
+import { AuthorCategory } from './LatestArticle';
 import { Link } from 'react-router-dom';
 
 function FeatureCard({ post, loadingCategoryPosts }) {
@@ -81,7 +81,8 @@ function FeatureCard({ post, loadingCategoryPosts }) {
           >
             <Box
               dangerouslySetInnerHTML={{
-                __html: convertContentFromJSONToHTML(post.content),
+                // __html: convertContentFromJSONToHTML(post.content),
+                __html: JSON.parse(post.content).blocks[0].text
               }}
             />
           </Box>
