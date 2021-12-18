@@ -26,7 +26,7 @@ function Blogpage() {
       <TopNav />
       <Switch>
       
-        <Route path="/blog">
+        <Route exact path="/blog">
           <>
             {loadingArticles && <SkeletonLoaderBlog />}
             {!loadingArticles && errorArticles && (
@@ -95,6 +95,12 @@ function Blogpage() {
             </Center>
           </>
         </Route>
+        <Route
+          exact
+          path="/blog/:category"
+          children={<BlogListingByCategory />}
+        />
+        <Route exact path="/blog/:category/:article" children={<BlogRead />} />
       </Switch>
     </Fade>
   );
