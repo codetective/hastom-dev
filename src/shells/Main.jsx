@@ -12,6 +12,8 @@ import CattleRanchServicePage from '../pages/CattleRanchingServicePage';
 import AgricInstituteServicePage from '../pages/AgricInstituteServicePage';
 import BeefProcessingServicePage from '../pages/BeefProcessingServicePage';
 import FarmLandsServicePage from '../pages/FarmLandsServicePage';
+import BlogListingByCategory from '../pages/BlogListingByCategory';
+import BlogRead from '../pages/BlogRead';
 
 export default function Main() {
   return (
@@ -19,7 +21,13 @@ export default function Main() {
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route exact path="/about" component={AboutPage} />
-        <Route exact path="/blog" component={Blogpage} />
+        <Route exact path="blog" component={Blogpage} />
+        <Route
+          exact
+          path="/blog-category/:category"
+          component={BlogListingByCategory}
+        />
+        <Route exact path="/blog-article/:article" component={BlogRead} />
         <Route exact path="/contact" component={ContactPage} />
         <Route exact path="/cashew-farm" component={CashewServicePage} />
         <Route
